@@ -127,6 +127,7 @@
     text-transform: capitalize;
     font-size: 11px;
     font-weight: 400;
+    font-color: white;
     letter-spacing: 0px;
 }
 
@@ -228,5 +229,28 @@
     pointer-events:none;
 }
 
+#links_right{
+	float:right;
+	position:relative;
+	padding-top:5px;
+	margin-right:25px;
+}
 
+#links_right a{
+	color:#bbb;
+	font-size:10px;
+	text-decoration:none;
+	transition: color 0.5s linear;
+	-moz-transition: color 0.5s linear;
+	-webkit-transition: color 0.5s linear;
+	-o-transition: color 0.5s linear;
+}
 
+#links_right a:hover{
+	color:#292929;
+}
+
+.error{
+    color: #ff0000;
+    font-size: 11px;
+}
