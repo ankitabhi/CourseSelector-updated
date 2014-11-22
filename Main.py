@@ -1,6 +1,7 @@
 __author__ = 'pa'
 
 from flask import Flask, render_template,request,session,flash,redirect,url_for
+from register import Register
 
 USERNAME = 'admin'
 PASSWORD = 'admin'
@@ -16,7 +17,9 @@ def home_page():
 
 @app.route('/register')
 def register():
-    return render_template('register.html')
+    r = Register()
+    majorList = r.getMajors()
+    return render_template('register.html',majors = majorList)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
