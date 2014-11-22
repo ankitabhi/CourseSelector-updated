@@ -26,18 +26,18 @@
     </head>
     <body>
         <div class="container">
-		
-			
+
+
 			<header>
 			
 				<h1> <strong>Course Selector</strong></h1>
 				<h2>A tool to help you select your courses</h2>
-				
+
 
 				<div class="support-note">
 					<span class="note-ie">Sorry, only modern browsers.</span>
 				</div>
-				
+
 			</header>
 
 			<section class="main">
@@ -58,7 +58,7 @@
 				        <input type="submit" name="submit" value="Sign in">
 				    </p>
                     <p class="clearfix">
-				        <a href="{{url_for('register',filename='register.html')}}"> New? Click here to register</a>
+				        <a href="{{url_for('register',filename='register.html')}}" class="rememberMe"> New? Click here to register</a>
 				    </p>
                     <div>
                     {% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
@@ -69,3 +69,9 @@
         </div>
     </body>
 </html>
+
+<script type="text/javascript">
+
+
+
+</script>
