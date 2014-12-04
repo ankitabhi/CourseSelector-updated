@@ -1,12 +1,113 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    hiiiiiiiiiiiiiii
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Course Selector</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/default.css"/>
+    <style>
+        ::-webkit-input-placeholder { font-size: 11px;text-align: center }
+        ::-moz-placeholder { font-size: 11px;text-align: center  } /* firefox 19+ */
+        :-ms-input-placeholder { font-size: 11px; text-align: center } /* ie */
+        input:-moz-placeholder { font-size: 11px;text-align: center  }
+    </style>
 
-    <meta charset="UTF-8">
-    <title></title>
 </head>
 <body>
 
+<div class="container">
+    <header >
+        <h1> <strong>Course Selector</strong></h1>
+        <h2>A tool to help you select your courses</h2>
+    </header>
+</div>
+<form action="{{url_for('homepage')}}" method="post" class="register">
+    {% for stud in studentDtls %}
+    <label class="heading1" style="width: 100%;text-align: center">Welcome {{stud.name|safe}}</label>
+
+
+
+    <fieldset class="row2" >
+        <legend style="font-size: 20px">Your Profile
+        </legend>
+        <p>
+            <label>Degree :
+            </label>
+
+            <label style="width: 200px;text-align: left">{{stud.degree|safe}}
+            </label>
+        </p>
+
+        <p>
+            <label>Major :
+            </label>
+
+            <label style="width: 200px;text-align: left">{{stud.major|safe}}
+            </label>
+        </p>
+
+        <p>
+            <label>Academic Year :
+            </label>
+
+            <label style="width: 200px;text-align: left">{{stud.ay|safe}}
+            </label>
+        </p>
+        {% endfor %}
+        <p>
+        <legend style="text-align: center;">Courses Taken
+            </legend>
+        <div class ="courseCSS">
+            <table>
+
+
+                <tr><td>Courses Name</td>
+                    <td>Semester</td>
+                </tr>
+
+                {% for course in courses %}
+                <tr><td>{{course.name|safe}}</td> <td>{{course.semester|safe}}</td></tr>
+                {% endfor %}
+            </table>
+        </div>
+
+
+        </p>
+
+    </fieldset>
+
+
+
+
+</form>
 </body>
+
 </html>
+
+
+<script type="text/javascript">
+
+
+    function addToBox(){
+        var course = document.getElementById("courses").value
+        existingC = document.getElementById("courseSelected").value
+        //alert(existingC)
+        if (! existingC == "") {
+            if (!checkifAlreadyAdded(existingC, course)) {
+                existingC = existingC + course + "\n";
+                document.getElementById("courseSelected").value = existingC
+            }
+
+            else
+                alert("This course has been added already")
+        }else {
+            existingC = existingC + course + "\n";
+            document.getElementById("courseSelected").value = existingC
+        }
+    }
+
+
+</script>
+
+
+
+

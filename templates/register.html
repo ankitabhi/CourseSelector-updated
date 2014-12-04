@@ -20,15 +20,15 @@
         <h2>A tool to help you select your courses</h2>
     </header>
 </div>
-<form action="" class="register">
+<form action="{{url_for('homepage')}}" method="post" class="register">
 <label class="heading">Registration</label>
 <fieldset class="row1">
     <legend>Account Details
     </legend>
     <p>
-        <label>Email *
+        <label for="email">Email *
         </label>
-        <input type="text"/>
+        <input type="text" name="email"/>
         <label>Repeat email *
         </label>
         <input type="text"/>
@@ -36,7 +36,7 @@
     <p>
         <label>Password*
         </label>
-        <input type="text"/>
+        <input type="text" name="password"/>
         <label>Repeat Password*
         </label>
         <input type="text"/>
@@ -63,8 +63,8 @@
         <label>Name *
         </label>
         <input  type="text" name="first_name" maxlength="30" style="width: 100px" placeholder="First Name">
-        <input  type="text" name="first_name" maxlength="30" style="width: 100px" placeholder="Middle Name">
-        <input  type="text" name="first_name" maxlength="30" style="width: 100px" placeholder="Last Name">
+        <input  type="text" name="middle_name" maxlength="30" style="width: 100px" placeholder="Middle Name">
+        <input  type="text" name="last_name" maxlength="30" style="width: 100px" placeholder="Last Name">
 
     </p>
     <p>
@@ -228,12 +228,15 @@
         </select>
     </p>
 
+
+
     <p>
-        <label>Academic Year *
+        <label>Current Semester *
         </label>
 
         <select>
-            <option value="2014" selected>2014</option>
+            <option value="fall" selected>Fall 2014</option>
+            <option value="spring" selected>Spring 2015</option>
         </select>
     </p>
 
@@ -259,7 +262,7 @@
     </p>
 </fieldset>
 
-<div style="padding-left:300px;" ><input type="submit" value="Continue &raquo;"></div>
+<div style="padding-left:300px;" ><input type="submit" value="Continue &raquo;" onclick="registerUser()"></div>
 </form>
 </body>
 
@@ -267,6 +270,7 @@
 
 
 <script type="text/javascript">
+
 
     function addToBox(){
         var course = document.getElementById("courses").value

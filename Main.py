@@ -2,6 +2,7 @@ __author__ = 'pa'
 
 from flask import Flask, render_template,request,session,flash,redirect,url_for
 from register import Register
+from Login import loginAccount
 
 USERNAME = 'admin'
 PASSWORD = 'admin'
@@ -26,18 +27,32 @@ def register():
 def login():
     print "in login"
     error = None
+    l = loginAccount()
+    username = request.form['login']
+    password = request.form['password']
     if request.method == 'POST':
-        if request.form['login'] != app.config['USERNAME']:
-            error = 'Invalid username'
-        elif request.form['password'] != app.config['PASSWORD']:
-            error = 'Invalid password'
+        if not l.ifUserExists(username,password):
+            error = 'Invalid username or password'
         else:
             session['logged_in'] = True
             flash('You were logged in')
-            return render_template("userHomePage.html")
+            dtls = l.getStudDtls(username)
+            d =  dtls[0]
+            print d['id']
+            courseDtls = l.getCourseDtls(d['id'])
+            print courseDtls
+
+            return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls)
     return render_template('index.html', error=error)
 
+@app.route('/home',methods=['GET','POST'])
+def homepage():
+    print "in homepage"
+    if request.method == 'POST':
+        email =  request.form['email']
+        password = request.form['password']
 
+    return render_template("userHomePage.html")
 
 if __name__ == '__main__':
     app.run()
