@@ -12,4 +12,9 @@ class Register:
         entries = [dict(code=row[0], name=row[1]) for row in cursor.fetchall()]
         return entries
 
+    def getCourses(self):
+        cursor = conn.execute('SELECT course_code,course_name FROM course_lookup order by major_code')
+        entries = [dict(code=row[0], name=row[1]) for row in cursor.fetchall()]
+        return entries
+
 

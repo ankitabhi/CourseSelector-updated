@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>CSS Registration Form</title>
+    <title>Registration Form</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="../static/css/default.css"/>
     <style>
@@ -211,8 +211,8 @@
         <label>Degree *
         </label>
 
-        <select>
-            <option value="bachelors"></option>Bachelor's
+        <select style="width:90px;">
+            <option value="bachelors">Bachelor's</option>
             <option value="masters" selected>Master's</option>
         </select>
     </p>
@@ -221,7 +221,7 @@
         <label>Major *
         </label>
 
-        <select id="major">
+        <select id="major" style="width: 250px;">
             {% for major in majors %}
             <option value="{{ major.code }}">{{ major.name|safe }}</option>
             {% endfor %}
@@ -233,11 +233,7 @@
         </label>
 
         <select>
-            <option value="Select"></option>
-            <option value="Mr">Mr</option>
-            <option value="Miss">Miss</option>
-            <option value="Mrs">Mrs</option>
-            <option value="Other">Other</option>
+            <option value="2014" selected>2014</option>
         </select>
     </p>
 
@@ -245,22 +241,64 @@
         <label>Current courses *
         </label>
 
-        <textarea rows="4" cols="4" style="border: 1px solid #F1F1F1;width: 126px; height: 73px;"></textarea>
+        <select id="courses" style="width: 400px;">
+            {% for course in courses %}
+            <option id="{{ course.code }}" value="{{course.name}}">{{ course.name|safe }}</option>
+            {% endfor %}
+        </select>
+        <input type="button" value="Add" onclick="addToBox();"/>
+        <br><br/>
+        <textarea id="courseSelected" rows="4" cols="4" style="border: 1px solid #F1F1F1;width: 390px; height: 73px;margin-left: 105px;"></textarea>
     </p>
 
     <p>
         <label>Interest *
         </label>
 
-        <textarea rows="4" cols="4" style="border: 1px solid #F1F1F1;width: 126px; height: 73px;"></textarea>
+        <textarea rows="4" cols="4" style="border: 1px solid #F1F1F1;width:389px; height: 73px;"></textarea>
     </p>
 </fieldset>
 
 <div style="padding-left:300px;" ><input type="submit" value="Continue &raquo;"></div>
 </form>
 </body>
+
 </html>
 
+
+<script type="text/javascript">
+
+    function addToBox(){
+        var course = document.getElementById("courses").value
+        existingC = document.getElementById("courseSelected").value
+        //alert(existingC)
+        if (! existingC == "") {
+            if (!checkifAlreadyAdded(existingC, course)) {
+                existingC = existingC + course + "\n";
+                document.getElementById("courseSelected").value = existingC
+            }
+
+            else
+                alert("This course has been added already")
+        }else {
+            existingC = existingC + course + "\n";
+            document.getElementById("courseSelected").value = existingC
+        }
+    }
+
+    function checkifAlreadyAdded(e,c){
+        //alert(e);
+        var s = e.split("\n")
+        //alert(s.length)
+        for(i=0;i<s.length;i++){
+            if(s[i] == c)
+                return true;
+        }
+        return false;
+    }
+
+
+</script>
 
 
 

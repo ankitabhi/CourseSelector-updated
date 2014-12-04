@@ -19,7 +19,8 @@ def home_page():
 def register():
     r = Register()
     majorList = r.getMajors()
-    return render_template('register.html',majors = majorList)
+    courseList = r.getCourses()
+    return render_template('register.html',majors = majorList,courses = courseList)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
