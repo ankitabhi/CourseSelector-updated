@@ -14,13 +14,17 @@
 </head>
 <body>
 
+<div class="codrops-top">
+    <div style="text-align: right;padding-right: 10px;"><a href="{{url_for('logout',filename='index.html')}}">Logout </a></div>
+</div>
+
 <div class="container">
     <header >
         <h1> <strong>Course Selector</strong></h1>
         <h2>A tool to help you select your courses</h2>
     </header>
 </div>
-<form action="{{url_for('homepage')}}" method="post" class="register">
+<form class="register">
     {% for stud in studentDtls %}
     <label class="heading1" style="width: 100%;text-align: center">Welcome {{stud.name|safe}}</label>
 

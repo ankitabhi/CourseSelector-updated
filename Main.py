@@ -54,5 +54,11 @@ def homepage():
 
     return render_template("userHomePage.html")
 
+@app.route('/logout',methods=['GET','POST'])
+def logout():
+    if request.method == 'POST':
+        session['logged_in'] == False
+        return render_template('index.html')
+    return render_template('index.html')
 if __name__ == '__main__':
     app.run()
