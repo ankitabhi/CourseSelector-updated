@@ -49,9 +49,36 @@ def login():
 def homepage():
     print "in homepage"
     if request.method == 'POST':
-        email =  request.form['email']
-        password = request.form['password']
 
+        r = Register()
+        accountDetails = {"email":request.form['email'],
+                          "password":request.form['password'],
+                          "title": request.form['title'],
+                          "fName": request.form['first_name'],
+                          "mName":request.form['middle_name'],
+                          "lName":request.form['last_name'],
+                          "gender" : request.form['sex'],
+                          "city" : request.form['city'],
+                          "state" : request.form['state'],
+                          "street" : request.form['street'],
+                          "country" : request.form['country'],
+                          "birthdate" : request.form['birthdate'],
+                          "courseDtls" :{"degree":request.form['degree'],
+                                         "major":request.form['major'],
+                                         "semester":request.form['semester'],
+                                         "coursesTaken":request.form['courses'],
+                                         "coursesCodeTaken":request.form['coursesCode']}}
+        q =  accountDetails['courseDtls']
+        print q['coursesTaken']
+
+        result = r.insertAccDtls(accountDetails)
+        print "result" + result
+        if(result == "inserted"):
+            l = loginAccount()
+            dtls = l.getStudDtls(accountDetails['email'])
+            d =  dtls[0]
+            courseDtls = l.getCourseDtls(d['id'])
+            return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls)
     return render_template("userHomePage.html")
 
 @app.route('/logout',methods=['GET','POST'])

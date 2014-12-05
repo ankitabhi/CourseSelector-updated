@@ -14,11 +14,16 @@ create table student_course_details(
 
 create table student_account_details(
   id integer primary key AUTOINCREMENT,
+  title varchar not null,
   first_name varchar not null,
   middle_name varchar,
   last_name varchar not null,
+  street varchar,
+  city varchar ,
+  state varchar ,
+  country varchar ,
+  birth_date date not null,
   email varchar not null,
-  username varchar not null,
   password varchar not null
 );
 
@@ -55,8 +60,8 @@ insert into course_lookup(course_code,course_name,major_code) values ("INFM603",
 insert into course_lookup(course_code,course_name,major_code) values ("CMSC122","CMSC122 - Introduction to Computer Programming via the Web","CMSC");
 insert into course_lookup(course_code,course_name,major_code) values ("CMSC131","CMSC131 - Object Oriented Programming I","CMSC");
 
-insert into student_account_details(first_name,middle_name,last_name,email,username,password) values ("Prajakta","Sanjeev","Arolker","parolker@umd.edu","admin","admin");
-insert into student_account_details(first_name,middle_name,last_name,email,username,password) values ("Sohini","","Sarkar","ssarkar@umd.edu","sohini","12345");
+insert into student_account_details(title,first_name,middle_name,last_name,email,birth_date,password) values ("Miss","Prajakta","Sanjeev","Arolker","admin","24-AUG-1990","admin");
+
 
 insert into student_academic_details(degree,major,semester) values ("Masters","Information Management","Fall 2014");
 

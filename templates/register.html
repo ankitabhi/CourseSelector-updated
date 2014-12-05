@@ -103,7 +103,7 @@
         <label>Title *
         </label>
 
-        <select style="width: 50px;">
+                <select style="width: 50px;" name="title">
             <option value="Mr" selected>Mr</option>
             <option value="Miss">Miss</option>
             <option value="Mrs">Mrs</option>
@@ -130,17 +130,17 @@
     <p>
         <label>Street
         </label>
-        <input type="text" class="long"/>
+                <input type="text" class="long" name="street"/>
     </p>
     <p>
         <label>City
         </label>
-        <input type="text" class="long"/>
+                <input type="text" class="long" name="city"/>
     </p>
     <p>
         <label>State
         </label>
-        <select>
+                <select name="state">
             <option>
             </option>
             <option value="1" selected>MD
@@ -150,7 +150,7 @@
     <p>
         <label>Country
         </label>
-        <select>
+                <select name="country">
             <option>
             </option>
             <option value="1" selected>United States
@@ -160,7 +160,7 @@
 
     <p>
         <label>Birthdate *</label>
-        <input type="text" id="datepicker" placeholder="mm/dd/yyyy" required="">
+                <input type="text" id="datepicker" placeholder="mm/dd/yyyy" required="" name="birthdate">
     </p>
 
 </fieldset>
@@ -172,7 +172,7 @@
         <label>Degree *
         </label>
 
-        <select style="width:90px;">
+                <select style="width:90px;" name="degree">
             <option value="bachelors">Bachelor's</option>
             <option value="masters" selected>Master's</option>
         </select>
@@ -182,7 +182,7 @@
         <label>Major *
         </label>
 
-        <select id="major" style="width: 250px;">
+                <select id="major" style="width: 250px;" name="major">
             {% for major in majors %}
             <option value="{{ major.code }}">{{ major.name|safe }}</option>
             {% endfor %}
@@ -195,9 +195,9 @@
         <label>Current Semester *
         </label>
 
-        <select>
-            <option value="fall" selected>Fall 2014</option>
-            <option value="spring" selected>Spring 2015</option>
+                <select name="semester">
+                    <option value="Fall 2014" selected>Fall 2014</option>
+                    <option value="Spring 2015">Spring 2015</option>
         </select>
     </p>
 
@@ -212,7 +212,10 @@
         </select>
         <input type="button" value="Add" onclick="addToBox();"/>
         <br><br/>
-        <textarea id="courseSelected" rows="4" cols="4" style="border: 1px solid #F1F1F1;width: 390px; height: 73px;margin-left: 105px;"></textarea>
+                <textarea id="courseSelected" name="courses" rows="4" cols="4" style="border: 1px solid #F1F1F1;width: 390px; height: 73px;margin-left: 105px;"></textarea>
+                <div style="display: none">
+                <textarea id="courseCodeSelected" name="coursesCode" rows="4" cols="4" style="border: 1px solid #F1F1F1;width: 390px; height: 73px;margin-left: 105px;"></textarea>
+            </div>
     </p>
 
     <p>
@@ -224,7 +227,7 @@
 </fieldset>
 
         <fieldset class="row5">
-<div style="padding-left:300px;" ><input  type="submit" value="Continue &raquo;" onclick="registerUser()"></div>
+<div style="padding-left:300px;" ><input  type="submit" value="Register" onclick="registerUser()"></div>
             </fieldset>
         </div>
 </form>
@@ -239,18 +242,42 @@
     function addToBox(){
         var course = document.getElementById("courses").value
         existingC = document.getElementById("courseSelected").value
+        existingCC = document.getElementById("courseCodeSelected").value
+        var courseCode = ""
+        var nodes = document.getElementById("courses").childNodes
+
+
+
         //alert(existingC)
-        if (! existingC == "") {
+        if (! (existingC == "" && existingCC == "") ) {
             if (!checkifAlreadyAdded(existingC, course)) {
                 existingC = existingC + course + "\n";
+
+
+                for(i=0;i<nodes.length;i++)
+                {
+                    if(nodes[i].selected){
+                        existingCC = existingCC + nodes[i].id+"\n"
+
+                    }
+                }
                 document.getElementById("courseSelected").value = existingC
+                document.getElementById("courseCodeSelected").value = existingCC
             }
 
             else
                 alert("This course has been added already")
         }else {
+            for(i=0;i<nodes.length;i++)
+                {
+                    if(nodes[i].selected){
+                        existingCC = existingCC + nodes[i].id + "\n"
+
+                    }
+                }
             existingC = existingC + course + "\n";
             document.getElementById("courseSelected").value = existingC
+            document.getElementById("courseCodeSelected").value = existingCC
         }
     }
 
