@@ -121,7 +121,7 @@ form p{
 }
 form.register fieldset.row1
 {
-    width:770px;
+    width:1000px;
     padding:5px;
     float:left;
     border-top:1px solid #F5F5F5;
@@ -136,15 +136,15 @@ form.register fieldset.row1 label{
 }
 form.register fieldset.row2
 {
-    width:770px;
+    width:1000px;
     border-top:1px solid #F1F1F1;
-    height:220px;
+    height:250px;
     padding:5px;
     float:left;
 }
 form.register fieldset.row3
 {
-    width:770px;
+    width:1000px;
     border-top:1px solid #F1F1F1;
     padding:5px;
     float:left;
@@ -158,8 +158,17 @@ form.register fieldset.row4
     padding:5px;
     float:left;
     clear:both;
-    width:500px;
+    width:1000px;
 }
+
+form.register fieldset.row5
+{
+    border-top:1px solid #F1F1F1;
+    padding:5px;
+    float:left;
+    width:1000px;
+}
+
 form.register .infobox{
     float:right;
     margin-top:20px;

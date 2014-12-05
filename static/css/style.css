@@ -241,7 +241,8 @@
 }
 
 .error{
-    color: #ff0000;
+    color: #ff0300;
     font-size: 11px;
+    font-weight: bold;
 }
 
