@@ -1,5 +1,6 @@
 @import url('demo.css');
 @import url('font-awesome.css');
+@import url('table.css');
 */*Set's border, padding and margin to 0 for all values*/
 {
     padding: 0;
@@ -7,12 +8,9 @@
     border: 0;
 }
 body, html {
-    color: #373C40;
-    font-family: Verdana,Arial, Helvetica, sans-serif;
-    height: 100%;
-    width: 100%;
-    background-color: #f0f0f0;
-    background: #e1c192 url(../images/wood_pattern.jpg);
+    background: #e1c192 url(../images/books1698x1131.jpg);
+    background-position: inherit;
+    background-repeat: no-repeat;
 }
 body {
     font-size: 70%;
@@ -33,10 +31,9 @@ a:hover{
 }
 .heading {
 
-    font-weight: 200;
+    font-weight: 400;
     color: #888888;
-    font-size: 16pt;
-    background: transparent url(../images/h1.png) no-repeat center left;
+    font-size: 20pt;
     padding-left: 33px;
     margin: 7px 5px 8px 8px;
 
@@ -44,7 +41,7 @@ a:hover{
 
 .heading1 {
 
-    font-weight: 200;
+    font-weight: 400;
     color: #888888;
     font-size: 16pt;
     background: transparent no-repeat center left;
@@ -60,17 +57,46 @@ h4 {
     font-weight:100;
     text-transform:uppercase;
 }
+
+input[type="submit"] {
+    background: #222222;
+    border: none;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+    text-transform: uppercase;
+    cursor: hand;
+    font-size: 15px;
+    color: #fcfcfc;
+    margin: 5px 0;
+    padding: 5px 22px;
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+    line-height: 1.2em;
+    text-align: center;
+    box-sizing: border-box;
+    -webkit-appearance: push-button;
+    -webkit-user-select: none;
+    white-space: pre;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-indent: 0px;
+    display: inline-block;
+    font-family: Verdana, sans-serif;
+}
+
+
+
 form.register{
     font-family: 'Ubuntu', 'Lato', sans-serif;
     font-weight: 400;
     /* Size and position */
-    position: relative;
+    position: inherit;
     padding-left: 100px;
     overflow: hidden;
+    margin: 20px 270px;
 
-    margin: 2px 120px;
     /* Styles */
-    background: #111;
+    background: #e1c192 url(../images/old-paper-texture.jpg);
+    background-position: inherit;
+    background-repeat: no-repeat;
     border-radius: 0.4em;
     border: 1px solid #191919;
     box-shadow:
@@ -87,7 +113,7 @@ form.register{
     border-color: #c6c6c6;
 }
 form p{
-    font-size: 8pt;
+    font-size: 11pt;
     clear:both;
     margin: 0;
     color:gray;
@@ -142,19 +168,19 @@ form.register .infobox{
     width:380px;
     height:98px;
     font-size:9px;
-    background: #FDFEFA url(../images/bg_infobox.gif) repeat-x top left;
 }
 form.register legend
 {
-    color: #abda0f;
+    color: #e2ffd6;
     padding:2px;
-    margin-left: 14px;
+    margin-left: 16px;
     font-weight:bold;
     font-size: 14px;
     font-weight:100;
+    font-style: oblique;
 }
 form.register label{
-    color:#444;
+    color: #000000;
     width:98px;
     float: left;
     text-align: right;
@@ -173,12 +199,7 @@ form.register label.obinfo{
     padding:3px;
     font-style:italic;
 }
-form.register input{
-    width: 140px;
-    color: #505050;
-    float: left;
-    margin-right: 5px;
-}
+
 form.register input.long{
     width: 247px;
     color: #505050;
@@ -210,23 +231,7 @@ form.register input[type=password]
     border: 1px solid #E1E1E1;
     height: 18px;
 }
-.button
-{
-    background: #abda0f url(../images/overlay.png) repeat-x;
-    padding: 8px 10px 8px;
-    color: #fff;
-    text-decoration: none;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
-    cursor: pointer;
-    float:right;
-    font-size:18px;
-    margin:10px;
-    border-radius: 0.4em;
-}
+
 form.register input[type=text].year
 {
     border: 1px solid #E1E1E1;
@@ -266,141 +271,9 @@ p.agreement label{
     margin-top:3px;
 }
 
+
 .container > header h1,
 .container > header h2 {
     color: #fff;
     text-shadow: 0 1px 1px rgba(0,0,0,0.7);
-}
-
-form.register input[type=submit] {
-    /* Width and position */
-
-    padding: 8px 5px;
-
-    /* Styles */
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.3),
-        inset 0 10px 10px rgba(255,255,255,0.1);
-    border-radius: 3px;
-    background: #38a6f0;
-    cursor:pointer;
-
-    /* Font styles */
-    font-family: 'Ubuntu', 'Lato', sans-serif;
-    color: white;
-    font-weight: 700;
-    font-size: 15px;
-    text-shadow: 0 -1px 0 rgba(0,0,0,0.8);
-}
-
-form.register input[type=submit]:hover {
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
-}
-
-form.register input[type=submit]:active {
-    background: #287db5;
-    box-shadow: inset 0 0 3px rgba(0,0,0,0.6);
-    border-color: #000; /* Fallback */
-    border-color: rgba(0,0,0,0.9);
-}
-
-.no-boxshadow form.register input[type=submit]:hover {
-    background: #2a92d8;
-}
-
-.courseCSS {
-	margin:0px;padding:0px;
-	width:100%;
-
-	border:1px solid #000000;
-
-	-moz-border-radius-bottomleft:0px;
-	-webkit-border-bottom-left-radius:0px;
-	border-bottom-left-radius:0px;
-
-	-moz-border-radius-bottomright:0px;
-	-webkit-border-bottom-right-radius:0px;
-	border-bottom-right-radius:0px;
-
-	-moz-border-radius-topright:0px;
-	-webkit-border-top-right-radius:0px;
-	border-top-right-radius:0px;
-
-	-moz-border-radius-topleft:0px;
-	-webkit-border-top-left-radius:0px;
-	border-top-left-radius:0px;
-}.courseCSS table{
-    border-collapse: collapse;
-        border-spacing: 0;
-	width:100%;
-	height:100%;
-	margin:0px;padding:0px;
-}.courseCSS tr:last-child td:last-child {
-	-moz-border-radius-bottomright:0px;
-	-webkit-border-bottom-right-radius:0px;
-	border-bottom-right-radius:0px;
-}
-.courseCSS table tr:first-child td:first-child {
-	-moz-border-radius-topleft:0px;
-	-webkit-border-top-left-radius:0px;
-	border-top-left-radius:0px;
-}
-.courseCSS table tr:first-child td:last-child {
-	-moz-border-radius-topright:0px;
-	-webkit-border-top-right-radius:0px;
-	border-top-right-radius:0px;
-}.courseCSS tr:last-child td:first-child{
-	-moz-border-radius-bottomleft:0px;
-	-webkit-border-bottom-left-radius:0px;
-	border-bottom-left-radius:0px;
-}.courseCSS tr:hover td{
-
-}
-.courseCSS tr:nth-child(odd){ background-color:#e5e5e5; }
-.courseCSS tr:nth-child(even)    { background-color:#ffffff; }.courseCSS td{
-	vertical-align:middle;
-
-
-	border:1px solid #000000;
-	border-width:0px 1px 1px 0px;
-	text-align:left;
-	padding:7px;
-	font-size:10px;
-	font-family:Arial;
-	font-weight:normal;
-	color:#000000;
-}.courseCSS tr:last-child td{
-	border-width:0px 1px 0px 0px;
-}.courseCSS tr td:last-child{
-	border-width:0px 0px 1px 0px;
-}.courseCSS tr:last-child td:last-child{
-	border-width:0px 0px 0px 0px;
-}
-.courseCSS tr:first-child td{
-		background:-o-linear-gradient(bottom, #cccccc 5%, #b2b2b2 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #cccccc), color-stop(1, #b2b2b2) );
-	background:-moz-linear-gradient( center top, #cccccc 5%, #b2b2b2 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#cccccc", endColorstr="#b2b2b2");	background: -o-linear-gradient(top,#cccccc,b2b2b2);
-
-	background-color:#cccccc;
-	border:0px solid #000000;
-	text-align:center;
-	border-width:0px 0px 1px 1px;
-	font-size:14px;
-	font-family:Arial;
-	font-weight:bold;
-	color:#000000;
-}
-.courseCSS tr:first-child:hover td{
-	background:-o-linear-gradient(bottom, #cccccc 5%, #b2b2b2 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #cccccc), color-stop(1, #b2b2b2) );
-	background:-moz-linear-gradient( center top, #cccccc 5%, #b2b2b2 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#cccccc", endColorstr="#b2b2b2");	background: -o-linear-gradient(top,#cccccc,b2b2b2);
-
-	background-color:#cccccc;
-}
-.courseCSS tr:first-child td:first-child{
-	border-width:0px 0px 1px 0px;
-}
-.courseCSS tr:first-child td:last-child{
-	border-width:0px 0px 1px 1px;
 }

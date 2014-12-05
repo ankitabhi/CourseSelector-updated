@@ -35,7 +35,9 @@
     overflow: hidden;
 
     /* Styles */
-    background: #111; 
+    background: #111 url(../images/old-paper-texture.jpg);
+    background-position: inherit;
+    background-repeat: no-repeat;
     border-radius: 0.4em;
     border: 1px solid #191919;
     box-shadow: 
@@ -142,13 +144,13 @@
     padding: 8px 5px;
   
     /* Styles */
-    border: 1px solid #0273dd; /* Fallback */
+    border: 1px solid #000000; /* Fallback */
     border: 1px solid rgba(0,0,0,0.4);
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.3),
         inset 0 10px 10px rgba(255,255,255,0.1);
     border-radius: 3px;
-    background: #38a6f0;
+    background: #222222;
     cursor:pointer;
   
     /* Font styles */
@@ -164,14 +166,14 @@
 }
 
 .form-3 input[type=submit]:active { 
-    background: #287db5;
+    background: #0a2534;
     box-shadow: inset 0 0 3px rgba(0,0,0,0.6);
     border-color: #000; /* Fallback */
     border-color: rgba(0,0,0,0.9);
 }
 
 .no-boxshadow .form-3 input[type=submit]:hover {
-    background: #2a92d8;
+    background: #0b2432;
 }
 
 .form-3:after {
