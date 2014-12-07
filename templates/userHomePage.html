@@ -16,7 +16,11 @@
 <body>
 
 <div class="codrops-top">
-    <div style="text-align: right;padding-right: 10px;"><a href="{{url_for('logout',filename='index.html')}}">Logout </a></div>
+    <div style="text-align: right;padding-right: 10px;">
+        {% for stud in studentDtls %}
+    <label><b>Welcome {{stud.name|safe}}</b></label><hr/><hr/>
+    <a href="{{url_for('logout',filename='index.html')}}">Logout </a></div>
+    {% endfor %}
 </div>
 
 <div class="container">
@@ -32,7 +36,8 @@
 
 <form class="register">
     <ul class="tab-links">
-                            <li class="active"><a href="/userHomePage">Home</a></li>
+                            <li class="active"><a href="/home">Home</a></li>
+                            <li><a href="/recommendation">Recommendation</a></li>
                             <li><a href="/feedbackform">Feedback</a></li>
                           </ul>
     <div class="tab-content">

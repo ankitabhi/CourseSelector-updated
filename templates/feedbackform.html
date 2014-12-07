@@ -5,10 +5,42 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="../static/css/feedback.css" />
     <link rel="stylesheet" type="text/css" href="../static/css/tabs.css" />
+
+    <script type="text/javascript">
+
+function myFunction() {
+    var a = document.getElementById("star-1").checked;
+    var b = document.getElementById("star-2").checked;
+    var c = document.getElementById("star-3").checked;
+    var d = document.getElementById("star-4").checked;
+    var e = document.getElementById("star-5").checked;
+
+    if(e|d|c)
+    {
+        var x = true;
+    }
+
+    else
+    {
+        var x = false;
+    }
+
+    document.getElementById("demo").innerHTML = x;
+}
+
+    </script>
 </head>
 <body>
 
-    <div class="container">
+<div class="codrops-top">
+    <div style="text-align: right;padding-right: 10px;">
+        {% for stud in studentDtls %}
+    <p><label><b>Welcome {{stud.name|safe}}</b></label></p>
+    <a href="{{url_for('logout',filename='index.html')}}">Logout </a></div>
+    {% endfor %}
+</div>
+
+<div class="container">
     <header >
         <h1> <strong>Course Selector</strong></h1>
         <h2>A tool to help you select your courses</h2>
@@ -20,8 +52,9 @@
 <form class="register">
 
     <ul class="tab-links">
-                            <li class="active"><a href="/userHomePage">Home</a></li>
-                            <li><a href="/feedbackform">Feedback</a></li>
+                            <li><a href="/home">Home</a></li>
+                            <li><a href="/recommendation">Recommendation</a></li>
+                            <li class="active"><a href="/feedbackform">Feedback</a></li>
                           </ul>
 
         <div class="tab-content">
@@ -61,6 +94,10 @@
                 {% endfor %}
             </table>
         </div>
+
+    <button onclick="myFunction()">Try it</button>
+    <p id="demo"></p>
+
     </fieldset>
    </div>
             </div>
