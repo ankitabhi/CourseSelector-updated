@@ -58,7 +58,7 @@ def homepage():
         print "ooooo"
         print exists
         if not exists:
-        accountDetails = {"email":request.form['email'],
+            accountDetails = {"email":request.form['email'],
                           "password":request.form['password'],
                           "title": request.form['title'],
                           "fName": request.form['first_name'],
@@ -75,16 +75,16 @@ def homepage():
                                          "semester":request.form['semester'],
                                          "coursesTaken":request.form['courses'],
                                          "coursesCodeTaken":request.form['coursesCode']}}
-        q =  accountDetails['courseDtls']
-        print q['coursesTaken']
+            q =  accountDetails['courseDtls']
+            print q['coursesTaken']
             email = request.form['email']
-        result = r.insertAccDtls(accountDetails)
-        print "result" + result
-        if(result == "inserted"):
-            l = loginAccount()
-            dtls = l.getStudDtls(accountDetails['email'])
-            d =  dtls[0]
-            courseDtls = l.getCourseDtls(d['id'])
+            result = r.insertAccDtls(accountDetails)
+            print "result" + result
+            if(result == "inserted"):
+                l = loginAccount()
+                dtls = l.getStudDtls(accountDetails['email'])
+                d =  dtls[0]
+                courseDtls = l.getCourseDtls(d['id'])
                 r = Register()
                 courseList = r.getCourses()
                 return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,usernames = email,allcourses = courseList)
@@ -99,7 +99,7 @@ def homepage():
         dtls = l.getStudDtls(email)
         d =  dtls[0]
         courseDtls = l.getCourseDtls(d['id'])
-            return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls)
+        return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls)
 
 
 
