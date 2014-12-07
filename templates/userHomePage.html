@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="../static/css/default.css"/>
     <link rel="stylesheet" type="text/css" href="../static/css/tabs.css"/>
+    <script src = "../static/js/jquery.js"></script>
     <style>
         ::-webkit-input-placeholder { font-size: 11px;text-align: center }
         ::-moz-placeholder { font-size: 11px;text-align: center  } /* firefox 19+ */
@@ -34,11 +35,19 @@
 
 
 
-<form class="register">
+<form class="register" style="height: 500px;">
     <ul class="tab-links">
+<<<<<<< HEAD
                             <li class="active"><a href="/home">Home</a></li>
                             <li><a href="/recommendation">Recommendation</a></li>
                             <li><a href="/feedbackform">Feedback</a></li>
+=======
+
+        <li><a href="{{url_for('home', email = 'usernames|safe')}}">Home</a></li>
+        <li class="active"><a href="{{url_for('feedback')}}">{{username|safe}}Feedback</a></li>
+        <li class="active"><a href="{{url_for('planner')}}">Planner</a></li>
+
+>>>>>>> FETCH_HEAD
                           </ul>
     <div class="tab-content">
             <div id="home" class="tab active">
@@ -75,18 +84,30 @@
         </p>
         {% endfor %}
         <p>
+
+                    <input type="button" id = "edit" style="float:right;padding: 10px;" value="Add course"/>
+                    <input type="button" id = "saveBtn" style="float:right;padding: 10px;" value="Save changes" onclick="updateCourses()"/>
+
+                </p>
+
+
+                <p>
         <legend style="text-align: center;">Courses Taken
             </legend>
         <div class ="CSSTableGenerator">
-            <table>
+            <table id="courseTable">
 
 
                 <tr><td>Courses Name</td>
                     <td>Semester</td>
+                    <td>Action</td>
                 </tr>
 
                 {% for course in courses %}
-                <tr><td>{{course.name|safe}}</td> <td>{{course.semester|safe}}</td></tr>
+                        <tr><td>{{course.name|safe}}</td>
+                            <td>{{course.semester|safe}}</td>
+                            <td><img src="../static/images/delete-24.jpg" alt="Click to delete course" class="deleteBtn"/></td>
+                        </tr>
                 {% endfor %}
             </table>
         </div>
@@ -129,6 +150,38 @@
             document.getElementById("courseSelected").value = existingC
         }
     }
+
+    function Add(){
+        jQuery("#courseTable tbody").append( "<tr>"+ "<td><select id='courses' style='width: 400px;' name = 'course'>{% for course in allcourses %}<option id='{{ course.code }}' value='{{course.name}}'>{{ course.name|safe }}</option>{% endfor %}</select></td>"+ "<td><select name='semester'><option value='Fall 2014' selected>Fall 2014</option><option value='Spring 2015'>Spring 2015</option></select></td>"+ "<td><img src='../static/images/save_icon.gif' class='doneBtn' alt='Click to Save'> </td>"+ "</tr>");
+
+    }
+
+    function Delete(){
+        var par = $(this).parent().parent(); //tr
+        r = confirm("Are you sure you want to remove this course?")
+        if (r) {
+            par.remove();
+        }
+
+    }
+
+    function Save(){
+
+
+            var inputValue = $(this).closest("tr").find("[name='course']").val();
+            var selectValuse = $(this).closest("tr").find("[name='semester']").val();
+            var index = $(this).closest("tr").index();
+            alert(inputValue + selectValuse + index)
+
+
+    }
+
+    jQuery(function(){
+        jQuery("#edit").bind("click", Add);
+        jQuery(".deleteBtn").bind("click",Delete);
+        jQuery(".doneBtn").bind("click", Save);
+    });
+
 
 
 </script>
