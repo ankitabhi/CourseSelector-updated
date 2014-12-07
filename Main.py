@@ -113,12 +113,13 @@ def logout():
 
 @app.route('/feedback',methods=['GET','POST'])
 def feedback():
-    print "in feedback"
+    print "in feedback"+ session['username']
+    user = session['username']
     l = loginAccount()
     dtls = l.getStudDtls('admin')
     d =  dtls[0]
     courseDtls = l.getCourseDtls(d['id'])
-    return render_template('feedbackform.html',courses = courseDtls )
+    return render_template('feedbackform.html',courses = courseDtls,username = user)
 
 
 @app.route('/homepage',methods=['GET','POST'])
