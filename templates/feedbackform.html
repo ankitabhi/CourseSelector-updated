@@ -3,10 +3,11 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" type="text/css" href="../static/css/default.css" />
     <link rel="stylesheet" type="text/css" href="../static/css/feedback.css" />
     <link rel="stylesheet" type="text/css" href="../static/css/tabs.css" />
-<<<<<<< HEAD
 
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
     <script type="text/javascript">
 
 function myFunction() {
@@ -30,25 +31,10 @@ function myFunction() {
 }
 
     </script>
-=======
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
->>>>>>> FETCH_HEAD
+
 </head>
 <body>
 
-<div class="codrops-top">
-    <div style="text-align: right;padding-right: 10px;">
-<<<<<<< HEAD
-        {% for stud in studentDtls %}
-    <p><label><b>Welcome {{stud.name|safe}}</b></label></p>
-    <a href="{{url_for('logout',filename='index.html')}}">Logout </a></div>
-    {% endfor %}
-=======
-        <a href="{{url_for('logout',filename='index.html')}}">Logout </a>
-
-    </div>
->>>>>>> FETCH_HEAD
-</div>
 
 <div class="container">
     <header >
@@ -62,11 +48,12 @@ function myFunction() {
 <form class="register">
 
     <ul class="tab-links">
-<<<<<<< HEAD
-                            <li><a href="/home">Home</a></li>
-                            <li><a href="/recommendation">Recommendation</a></li>
-                            <li class="active"><a href="/feedbackform">Feedback</a></li>
-                          </ul>
+
+                            <li><a href="{{url_for('home', email = 'admin')}}" >Home</a></li>
+        <li class="active"><a href="{{url_for('feedback')}}">Feedback</a></li>
+        <li><a href="{{url_for('planner')}}">Planner</a></li>
+        </ul>
+
 
         <div class="tab-content">
             <div id="home" class="tab active">
@@ -112,53 +99,8 @@ function myFunction() {
     </fieldset>
    </div>
             </div>
-=======
-        <li class="active"><a href="{{url_for('home', email = 'admin')}}" >Home</a></li>
-        <li ><a href="{{url_for('feedback')}}">Feedback</a></li>
-        <li class="active"><a href="{{url_for('planner')}}">Planner</a></li>
-    </ul>
-
-    <div class="tab-content">
-        <div id="home" class="tab active">
-
-            <fieldset class="row2">
-
-                <div class ="CSSTableGenerator">
-                    <table>
 
 
-                        <tr><td>Courses Name</td>
-                            <td>Rating</td>
-                        </tr>
-
-                        {% for course in courses %}
-                        <tr><td>{{course.name|safe}}</td>
-
-                            <td>
-                                <div class="stars">
-
-                                    <input type="radio" name="star" class="star-1" id="star-1" />
-                                    <label class="star-1" for="star-1">1</label>
-                                    <input type="radio" name="star" class="star-2" id="star-2" />
-                                    <label class="star-2" for="star-2">2</label>
-                                    <input type="radio" name="star" class="star-3" id="star-3" />
-                                    <label class="star-3" for="star-3">3</label>
-                                    <input type="radio" name="star" class="star-4" id="star-4" />
-                                    <label class="star-4" for="star-4">4</label>
-                                    <input type="radio" name="star" class="star-5" id="star-5" />
-                                    <label class="star-5" for="star-5">5</label>
-                                    <span></span>
-
-                                </div>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                </div>
-            </fieldset>
-        </div>
-    </div>
->>>>>>> FETCH_HEAD
 </form>
 
 

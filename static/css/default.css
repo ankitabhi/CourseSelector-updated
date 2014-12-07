@@ -1,6 +1,7 @@
 @import url('demo.css');
 @import url('font-awesome.css');
 @import url('table.css');
+
 */*Set's border, padding and margin to 0 for all values*/
 {
     padding: 0;
