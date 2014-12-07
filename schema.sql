@@ -10,6 +10,7 @@ create table student_course_details(
   course_name varchar not null,
   course_code varchar not null,
   semester varchar not null
+
 );
 
 create table student_account_details(
@@ -47,7 +48,8 @@ create table course_lookup (
   id integer primary key AUTOINCREMENT,
   course_code varchar not null,
   course_name varchar not null,
-  major_code varchar
+  major_code varchar,
+  course_rating integer
   );
 
 insert into majors_lookup(major_code,major_name) values ("INFM","Information Management");
@@ -55,8 +57,16 @@ insert into majors_lookup(major_code,major_name) values ("CMSC","Computer Scienc
 insert into majors_lookup(major_code,major_name) values ("ENTS","Telecommunication");
 insert into majors_lookup(major_code,major_name) values ("ENEE","Electrical and Computer Engineering");
 
-insert into course_lookup(course_code,course_name,major_code) values ("INFM600","INFM600 - Information Environments","INFM");
-insert into course_lookup(course_code,course_name,major_code) values ("INFM603","INFM603 - Information Technology and Organizational Context","INFM");
+insert into course_lookup(course_code,course_name,major_code,course_rating) values ("INFM600","INFM600 - Information Environments","INFM",1);
+insert into course_lookup(course_code,course_name,major_code,course_rating) values ("INFM603","INFM603 - Information Technology and Organizational Context","INFM",2);
+insert into course_lookup(course_code,course_name,major_code,course_rating) values ("INFM605","INFM605 - Users and Use Context","INFM",4);
+insert into course_lookup(course_code,course_name,major_code,course_rating) values ("INFM612","INFM612 - Management of Information Program and Services","INFM",5);
+insert into course_lookup(course_code,course_name,major_code,course_rating) values ("INFM620","INFM620 - Introduction to Strategic Informatino Management","INFM",2);
+insert into course_lookup(course_code,course_name,major_code,course_rating) values ("INFM700","INFM700 - Information Technology and Organizational Context","INFM",4);
+
+
+
+
 insert into course_lookup(course_code,course_name,major_code) values ("CMSC122","CMSC122 - Introduction to Computer Programming via the Web","CMSC");
 insert into course_lookup(course_code,course_name,major_code) values ("CMSC131","CMSC131 - Object Oriented Programming I","CMSC");
 

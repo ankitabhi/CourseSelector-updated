@@ -41,16 +41,23 @@ def login():
             print d['id']
             courseDtls = l.getCourseDtls(d['id'])
             print courseDtls
-
-            return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls)
+            r = Register()
+            courseList = r.getCourses()
+            return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,usernames = username,allcourses = courseList)
     return render_template('index.html', error=error)
 
 @app.route('/home',methods=['GET','POST'])
 def homepage():
     print "in homepage"
+    print str(request.method)
+    email = ""
     if request.method == 'POST':
-
+        print "POST"
         r = Register()
+        exists = r.checkIfUserExists(request.form['email'])
+        print "ooooo"
+        print exists
+        if not exists:
         accountDetails = {"email":request.form['email'],
                           "password":request.form['password'],
                           "title": request.form['title'],
@@ -70,7 +77,7 @@ def homepage():
                                          "coursesCodeTaken":request.form['coursesCode']}}
         q =  accountDetails['courseDtls']
         print q['coursesTaken']
-
+            email = request.form['email']
         result = r.insertAccDtls(accountDetails)
         print "result" + result
         if(result == "inserted"):
@@ -78,8 +85,23 @@ def homepage():
             dtls = l.getStudDtls(accountDetails['email'])
             d =  dtls[0]
             courseDtls = l.getCourseDtls(d['id'])
+                r = Register()
+                courseList = r.getCourses()
+                return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,usernames = email,allcourses = courseList)
+        else:
+            error = "Email ID already exists"
+            return render_template('register.html',error = error)
+
+    else:
+
+        print "in GET" + str('admin')
+        l = loginAccount()
+        dtls = l.getStudDtls(email)
+        d =  dtls[0]
+        courseDtls = l.getCourseDtls(d['id'])
             return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls)
-    return render_template("userHomePage.html")
+
+
 
 @app.route('/logout',methods=['GET','POST'])
 def logout():
@@ -87,5 +109,29 @@ def logout():
         session['logged_in'] == False
         return render_template('index.html')
     return render_template('index.html')
+
+@app.route('/feedback',methods=['GET','POST'])
+def feedback():
+    print "in feedback"
+    l = loginAccount()
+    dtls = l.getStudDtls('admin')
+    d =  dtls[0]
+    courseDtls = l.getCourseDtls(d['id'])
+    return render_template('feedbackform.html',courses = courseDtls )
+
+
+@app.route('/home/<email>',methods=['GET','POST'])
+def home(email):
+    print "in homepage email" + email
+    l = loginAccount()
+    dtls = l.getStudDtls(email)
+    d =  dtls[0]
+    courseDtls = l.getCourseDtls(d['id'])
+    return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls)
+
+@app.route('/planner',methods=['GET','POST'])
+def planner():
+    return render_template("planner.html")
+
 if __name__ == '__main__':
     app.run()
