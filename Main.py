@@ -35,6 +35,7 @@ def login():
             error = 'Invalid username or password'
         else:
             session['logged_in'] = True
+            session['username'] = request.form['login']
             flash('You were logged in')
             dtls = l.getStudDtls(username)
             d =  dtls[0]
@@ -120,11 +121,12 @@ def feedback():
     return render_template('feedbackform.html',courses = courseDtls )
 
 
-@app.route('/home/<email>',methods=['GET','POST'])
-def home(email):
-    print "in homepage email" + email
+@app.route('/homepage',methods=['GET','POST'])
+def home():
+    print "in homepage email" + session['username']
+    user = session['username']
     l = loginAccount()
-    dtls = l.getStudDtls(email)
+    dtls = l.getStudDtls(user)
     d =  dtls[0]
     courseDtls = l.getCourseDtls(d['id'])
     return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls)
