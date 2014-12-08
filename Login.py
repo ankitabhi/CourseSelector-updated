@@ -17,7 +17,7 @@ class loginAccount:
             return False
 
     def getStudDtls(self,username):
-        cursor = conn.execute('SELECT s.first_name || " " || s.last_name,a.degree,a.major,a.semester,s.id from student_account_details s,student_academic_details a where s.id = a.id and s.username="'+username+'"')
+        cursor = conn.execute('SELECT s.first_name || " " || s.last_name,a.degree,a.major,a.semester,s.id from student_account_details s,student_academic_details a where s.id = a.id and s.email="'+username+'"')
         entries = [dict(name=row[0], degree=row[1], major=row[2], ay = row [3], id  = row [4]) for row in cursor.fetchall()]
         print "ahsdihaodihwqdw"
         return entries
