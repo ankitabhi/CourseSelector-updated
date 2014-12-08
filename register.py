@@ -53,3 +53,40 @@ class Register:
         conn.commit()
         return "inserted"
 
+    def checkIfUserExists(self,username):
+        cursor = conn.execute('SELECT * from student_account_details s where s.email="'+username+'"')
+        cur = cursor.fetchall()
+        if cur.__len__()>0:
+            return True
+        else:
+            return False
+
+
+    def updateStudCourses(self,courseName,courseCode,semester,user):
+        cursor = conn.execute('select id from student_account_details where email = "'+user+'"')
+        cur = cursor.fetchone()
+        id =  cur[0]
+
+        cursor = conn.execute('insert into student_course_details(id,course_name,course_code,semester) values (?,?,?,?)',
+                              [id,
+                              courseName,
+                              courseCode,
+                              semester])
+        conn.commit()
+        return "inserted"
+
+    def deleteStudCourse(self,code,user):
+        cursor = conn.execute('select id from student_account_details where email = "'+user+'"')
+        cur = cursor.fetchone()
+        id =  cur[0]
+
+        query = "delete from student_course_details where course_code =\""+ code + "\" and id ="+str(id)
+        print query
+        cursor = conn.execute(query)
+        conn.commit()
+        return "deleted"
+
+    def getOtherCourses(self,id):
+        cursor = conn.execute('select c.course_code,c.course_name from course_lookup c where c.course_code not in ( select s.course_code from student_course_details s where s.id= '+str(id)+')')
+        entries = [dict(code=row[0], name=row[1]) for row in cursor.fetchall()]
+        return entries
