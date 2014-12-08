@@ -1,6 +1,6 @@
 __author__ = 'pa'
 
-from flask import Flask, render_template,request,session,flash,redirect,url_for
+from flask import Flask, render_template,request,session,flash,redirect,url_for,jsonify
 from register import Register
 from Login import loginAccount
 
@@ -28,14 +28,19 @@ def login():
     print "in login"
     error = None
     l = loginAccount()
-    username = request.form['login']
-    password = request.form['password']
+    print request.method
+
+    print "1"
     if request.method == 'POST':
+        username = request.form['login']
+        password = request.form['password']
+        print "2"
         if not l.ifUserExists(username,password):
             error = 'Invalid username or password'
         else:
             session['logged_in'] = True
             session['username'] = request.form['login']
+            print session['username']
             flash('You were logged in')
             dtls = l.getStudDtls(username)
             d =  dtls[0]
@@ -44,7 +49,20 @@ def login():
             print courseDtls
             r = Register()
             courseList = r.getCourses()
-            return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,usernames = username,allcourses = courseList)
+            return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,username = username,allcourses = courseList)
+    else:
+        print "in this one"
+        if session['logged_in'] == True:
+            print request.args.get('username')
+            dtls = l.getStudDtls()
+            d =  dtls[0]
+            print d['id']
+            courseDtls = l.getCourseDtls(d['id'])
+            print courseDtls
+            r = Register()
+            courseList = r.getCourses()
+            return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,username = username,allcourses = courseList)
+
     return render_template('index.html', error=error)
 
 @app.route('/home',methods=['GET','POST'])
@@ -113,24 +131,59 @@ def logout():
 
 @app.route('/feedback',methods=['GET','POST'])
 def feedback():
-    print "in feedback"+ session['username']
+    print "in feedback" + session['username']
     user = session['username']
     l = loginAccount()
-    dtls = l.getStudDtls('admin')
+    dtls = l.getStudDtls(user)
     d =  dtls[0]
     courseDtls = l.getCourseDtls(d['id'])
-    return render_template('feedbackform.html',courses = courseDtls,username = user)
+    return render_template('feedbackform.html',courses = courseDtls,username = user )
 
 
 @app.route('/homepage',methods=['GET','POST'])
 def home():
+    print request.method
     print "in homepage email" + session['username']
     user = session['username']
     l = loginAccount()
     dtls = l.getStudDtls(user)
     d =  dtls[0]
     courseDtls = l.getCourseDtls(d['id'])
-    return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls)
+    r = Register()
+    courseList = r.getOtherCourses(d['id'])
+    if request.method == 'GET':
+        if not request.args.get('courseName') == None:
+            courseName = request.args.get('courseName')
+            courseCode = request.args.get('courseCode')
+            semester = request.args.get('semester')
+            print courseName + semester
+            reg = Register()
+            result = reg.updateStudCourses(courseName,courseCode,semester,user)
+            print result
+            if result == "inserted":
+                dtls = l.getStudDtls(user)
+                d =  dtls[0]
+                courseDtls = l.getCourseDtls(d['id'])
+                r = Register()
+                courseList = r.getCourses()
+                message = {"msg":"success"}
+                return jsonify(message)
+        elif not request.args.get('code') == None:
+            courseCode = request.args.get('code')
+            print courseCode
+            reg = Register()
+            result = reg.deleteStudCourse(courseCode,user)
+            print result
+            if result == "deleted":
+                dtls = l.getStudDtls(user)
+                d =  dtls[0]
+                courseDtls = l.getCourseDtls(d['id'])
+                r = Register()
+                courseList = r.getCourses()
+                message = {"msg":"success"}
+                return jsonify(message)
+
+    return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,allcourses = courseList)
 
 @app.route('/planner',methods=['GET','POST'])
 def planner():
