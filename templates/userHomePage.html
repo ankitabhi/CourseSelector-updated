@@ -12,7 +12,9 @@
         :-ms-input-placeholder { font-size: 11px; text-align: center } /* ie */
         input:-moz-placeholder { font-size: 11px;text-align: center  }
     </style>
-
+    <script src="../static/js/media/js/jquery.js"></script>
+    <script src="../static/js/media/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/jquery.dataTables.css"/>
 </head>
 <body>
 
@@ -41,7 +43,7 @@
 
 
         <li class="active"><a href="{{url_for('home')}}">Home</a></li>
-        <li><a href="{{url_for('feedback')}}">{{username|safe}}Feedback</a></li>
+        <li><a href="{{url_for('feedback')}}">Feedback</a></li>
         <li><a href="{{url_for('planner')}}">Planner</a></li>
         </ul>
 
@@ -90,21 +92,24 @@
                 <p>
         <legend style="text-align: center;">Courses Taken
             </legend>
-        <div class ="CSSTableGenerator">
+        <div class>
             <table id="courseTable">
 
-
+                <thead>
                 <tr><td>Courses Name</td>
                     <td>Semester</td>
                     <td>Action</td>
                 </tr>
-
+                </thead>
+                
+                <tbody>
                 {% for course in courses %}
                         <tr><td>{{course.name|safe}}</td>
                             <td>{{course.semester|safe}}</td>
                             <td><img src="../static/images/delete-24.jpg" alt="Click to delete course" class="deleteBtn"/></td>
                         </tr>
                 {% endfor %}
+                </tbody>
             </table>
         </div>
 
@@ -147,27 +152,82 @@
         }
     }
 
-    function Add(){
-        jQuery("#courseTable tbody").append( "<tr>"+ "<td><select id='courses' style='width: 400px;' name = 'course'>{% for course in allcourses %}<option id='{{ course.code }}' value='{{course.name}}'>{{ course.name|safe }}</option>{% endfor %}</select></td>"+ "<td><select name='semester'><option value='Fall 2014' selected>Fall 2014</option><option value='Spring 2015'>Spring 2015</option></select></td>"+ "<td><img src='../static/images/save_icon.gif' class='doneBtn' alt='Click to Save'> </td>"+ "</tr>");
+    var courseName = ""
+    var courseCode = ""
+    var sem = ""
+    function addVal(obj,id,ob){
+        courseName = obj;
+        courseCode = id
+
+
+    }
+    function addValSem(obj,ob){
+        sem=obj
+
+
+    }
+    function Add() {
+
+        var t = $('#courseTable').DataTable();
+
+        t.row.add([
+                     "<select class='ccourse' id='courses' style='width: 400px;' name = 'course' onchange='addVal(this.options[this.selectedIndex].innerHTML,this.options[this.selectedIndex].id,this)'>{% for course in allcourses %}<option id='{{ course.code }}' value='{{course.name}}'>{{ course.name|safe }}</option>{% endfor %}</select>",
+                      "<select id='sem' name='semester' onchange='addValSem(this.options[this.selectedIndex].innerHTML,this)'><option value='Fall 2014' selected>Fall 2014</option><option value='Spring 2015'>Spring 2015</option></select>",
+                      "<input type = 'button' value ='Save' id='doneBtn'>"
+
+        ]).draw();
+        var i = document.getElementById("courses");
+         courseName = i.options[i.selectedIndex].value;
+         courseCode = i.options[i.selectedIndex].id;
+        var p = document.getElementById("sem");
+        sem = p.options[p.selectedIndex].value;
+       // alert(sem)
+        jQuery("#doneBtn").bind("click", Save);
+
+
+       /* jQuery("#courseTable tbody").append( "<tr>"+ "<td><select class='ccourse' id='courses' style='width: 400px;' name = 'course' onchange='addVal(this.options[this.selectedIndex].innerHTML,this.options[this.selectedIndex].id,this)'>{% for course in allcourses %}<option id='{{ course.code }}' value='{{course.name}}'>{{ course.name|safe }}</option>{% endfor %}</select></td>"+ "<td><select name='semester' onchange='addValSem(this.options[this.selectedIndex].innerHTML,this)'><option value='Fall 2014' selected>Fall 2014</option><option value='Spring 2015'>Spring 2015</option></select></td>"+ "<td><input type = 'button' value ='Save' id='doneBtn'> </td>"+ "</tr>");
+        jQuery("#doneBtn").bind("click", Save);
+        jQuery("#courses").on('change', function () {
+            alert('hi')
+            alert(jQuery(this).val());
+        });*/
 
     }
 
     function Delete(){
         var par = $(this).parent().parent(); //tr
+        var cellName = $(this).parent().siblings().eq(0).text()
+        var cellID = cellName.substring(0,7)
+      //  alert(cellName +':'+ cellID)
+
         r = confirm("Are you sure you want to remove this course?")
         if (r) {
-            par.remove();
+        jsonObj = {code:cellID}
+        jQuery.getJSON('/homepage',jsonObj,function(data) {
+            var a  = data.msg
+            if(a == "success")
+                location.reload();
+        });
+
+
+
+           // par.remove();
+
         }
 
     }
-
+    
     function Save(){
 
+        //alert(courseName+sem)
+        jsonObj = {courseName:courseName,semester:sem,courseCode:courseCode}
+        jQuery.getJSON('/homepage',jsonObj,function(data) {
 
-            var inputValue = $(this).closest("tr").find("[name='course']").val();
-            var selectValuse = $(this).closest("tr").find("[name='semester']").val();
-            var index = $(this).closest("tr").index();
-            alert(inputValue + selectValuse + index)
+
+            var a  = data.msg
+            if(a == "success")
+            location.reload();
+        });
 
 
     }
@@ -179,7 +239,13 @@
     });
 
 
-
+     jQuery(document).ready(function() {
+    jQuery('#courseTable').DataTable({
+        "searching" : false,
+        "lengthChange": false,
+        "pageLength": 6
+    })
+    } );
 </script>
 
 
