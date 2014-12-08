@@ -9,7 +9,7 @@ class loginAccount:
 
     def ifUserExists(self,username,password):
         print username
-        cursor = conn.execute('SELECT * from student_account_details s where s.username="'+username+'" and s.password ="'+password+'"')
+        cursor = conn.execute('SELECT * from student_account_details s where s.email="'+username+'" and s.password ="'+password+'"')
         cur = cursor.fetchall()
         if cur.__len__()>0:
             return True
