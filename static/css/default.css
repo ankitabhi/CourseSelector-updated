@@ -95,7 +95,7 @@ form.register{
     margin: 20px 270px;
 
     /* Styles */
-    background: #e1c192 url(../images/old-paper-texture.jpg);
+    /*background: #e1c192 url(../images/old-paper-texture.jpg);*/
     background-position: inherit;
     background-repeat: no-repeat;
     border-radius: 0.4em;
