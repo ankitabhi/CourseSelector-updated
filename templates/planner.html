@@ -29,9 +29,9 @@
 <form class="register" style="overflow-y:auto;height: 500px">
 
     <ul class="tab-links">
-        <li><a href="{{url_for('home', email = 'admin')}}" >Home</a></li>
+        <li><a href="{{url_for('home')}}" >Home</a></li>
         <li><a href="{{url_for('feedback')}}">Feedback</a></li>
-        <li class="active"><a href="{{url_for('planner')}}">Planner</a></li>
+        <li class="active"><a href="{{url_for('planner')}}">Our Recommendation</a></li>
     </ul>
 
     <div class="tab-content">
@@ -41,32 +41,27 @@
 
                 <div class ="CSSTableGenerator">
                     <table>
-
-
-                        <tr><td>Courses Name</td>
-                            <td>Rating</td>
+                        <tr>
+                            <td>Based on Interests</td>
                         </tr>
 
                         {% for course in courses %}
                         <tr><td>{{course.name|safe}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                
+                <div class ="CSSTableGenerator">
+                    <table>
 
-                            <td>
-                                <div class="stars">
 
-                                    <input type="radio" name="star" class="star-1" id="star-1" />
-                                    <label class="star-1" for="star-1">1</label>
-                                    <input type="radio" name="star" class="star-2" id="star-2" />
-                                    <label class="star-2" for="star-2">2</label>
-                                    <input type="radio" name="star" class="star-3" id="star-3" />
-                                    <label class="star-3" for="star-3">3</label>
-                                    <input type="radio" name="star" class="star-4" id="star-4" />
-                                    <label class="star-4" for="star-4">4</label>
-                                    <input type="radio" name="star" class="star-5" id="star-5" />
-                                    <label class="star-5" for="star-5">5</label>
-                                    <span></span>
+                        <tr><td>Based on Courses Taken</td>
 
-                                </div>
-                            </td>
+                        </tr>
+
+                        {% for course in courses %}
+                        <tr><td>{{course.name|safe}}</td>
                         </tr>
                         {% endfor %}
                     </table>
