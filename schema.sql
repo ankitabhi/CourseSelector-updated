@@ -3,6 +3,20 @@ drop table if exists course_lookup;
 drop table if exists student_account_details;
 drop table if exists student_academic_details;
 drop table if exists student_course_details;
+drop table if exists course_tags;
+drop table if exists student_interests;
+
+create table course_tags(
+  course_code interger not null,
+  tag_name VARCHAR not null,
+  FOREIGN KEY (course_code) REFERENCES course_lookup(id)
+);
+
+
+create table student_interests(
+  s_id integer not null,
+  tag_name VARCHAR not null
+);
 
 
 create table student_course_details(
@@ -64,11 +78,10 @@ insert into course_lookup(course_code,course_name,major_code,course_rating) valu
 insert into course_lookup(course_code,course_name,major_code,course_rating) values ("INFM620","INFM620 - Introduction to Strategic Informatino Management","INFM",2);
 insert into course_lookup(course_code,course_name,major_code,course_rating) values ("INFM700","INFM700 - Information Technology and Organizational Context","INFM",4);
 
+insert into course_tags(course_code, tag_name) VALUES ("INFM743","web development");
+insert into course_tags(course_code, tag_name) VALUES ("INFM743","programming");
+insert into course_tags(course_code, tag_name) VALUES ("INFM743","python");
 
-
-
-insert into course_lookup(course_code,course_name,major_code) values ("CMSC122","CMSC122 - Introduction to Computer Programming via the Web","CMSC");
-insert into course_lookup(course_code,course_name,major_code) values ("CMSC131","CMSC131 - Object Oriented Programming I","CMSC");
 
 insert into student_account_details(title,first_name,middle_name,last_name,email,birth_date,password) values ("Miss","Prajakta","Sanjeev","Arolker","admin","24-AUG-1990","admin");
 
@@ -77,3 +90,6 @@ insert into student_academic_details(degree,major,semester) values ("Masters","I
 
 insert into student_course_details(id, course_name, course_code, semester) values (1,"INFM600 - Information Environments","INFM600","Fall 2014");
 insert into student_course_details(id, course_name, course_code, semester) values (1,"INFM603 - Information Technology","INFM603","Fall 2014");
+
+insert into student_interests(s_id, tag_name) VALUES (1,"programming");
+insert into student_interests(s_id, tag_name) VALUES (1,"web development");
