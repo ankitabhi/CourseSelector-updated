@@ -187,7 +187,10 @@ def home():
 
 @app.route('/planner',methods=['GET','POST'])
 def planner():
-    return render_template("planner.html")
+    r = Register()
+    user = session['username']
+    result = r.getCoursesBasedOnInterests(user)
+    return render_template("planner.html",courses = result)
 
 if __name__ == '__main__':
     app.run()
