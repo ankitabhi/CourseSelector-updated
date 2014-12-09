@@ -191,7 +191,7 @@ form.register legend
 }
 form.register label{
     color: #000000;
-    width:98px;
+    width:100px;
     float: left;
     text-align: right;
     margin-right: 6px;
