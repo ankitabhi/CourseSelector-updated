@@ -23,11 +23,13 @@
                 list[i].setAttribute("id","tr"+i);
             }
             for(var x=1;x<(num);x++) {
-
+                console.log(x)
+                z = 1;
                 $('#tr'+x).each(function() {
                     $(this).find('#example-2').ratings(5).bind('ratingchanged', function (event, data) {
-                        $(this).find('#example-rating-2').text(data.rating);
-
+                      console.log(data.rating)
+                      $('#tr'+z).find('#example-rating-2').text(data.rating);
+                      z++
 
                     });
                 });
@@ -81,7 +83,7 @@
                 {% for course in courses %}
                 <tr><td>{{course.name|safe}}</td>
 
-                    <td id="rowData" onload="create()">
+                    <td>
 
                         <div id="example-2"></div> <br />
                             Your Rating: <span id="example-rating-2">not set</span>
