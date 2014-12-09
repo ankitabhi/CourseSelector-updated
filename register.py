@@ -90,3 +90,13 @@ class Register:
         cursor = conn.execute('select c.course_code,c.course_name from course_lookup c where c.course_code not in ( select s.course_code from student_course_details s where s.id= '+str(id)+')')
         entries = [dict(code=row[0], name=row[1]) for row in cursor.fetchall()]
         return entries
+    
+    def getCoursesBasedOnInterests(self,user):
+        cursor = conn.execute('select id from student_account_details where email = "'+user+'"')
+        cur = cursor.fetchone()
+        id =  cur[0]
+
+        query = "select c.course_code,c.course_name from course_lookup c where c.course_code in (SELECT t.course_code from course_tags t where t.tag_name IN (SELECT s.tag_name from student_interests s where s.s_id = "+str(id)+"))"
+        cursor = conn.execute(query)
+        entries = [dict(code=row[0], name=row[1]) for row in cursor.fetchall()]
+        return entries
