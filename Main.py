@@ -42,14 +42,17 @@ def login():
             session['username'] = request.form['login']
             print session['username']
             flash('You were logged in')
-            dtls = l.getStudDtls(username)
+            mainList = l.getStudDtls(username)
+            print mainList
+            dtls = mainList[0]
+            intList = mainList[1]
             d =  dtls[0]
             print d['id']
             courseDtls = l.getCourseDtls(d['id'])
             print courseDtls
             r = Register()
             courseList = r.getCourses()
-            return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,username = username,allcourses = courseList)
+            return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,username = username,allcourses = courseList,interests = intList)
     else:
         print "in this one"
         if session['logged_in'] == True:
@@ -101,7 +104,10 @@ def homepage():
             print "result" + result
             if(result == "inserted"):
                 l = loginAccount()
-                dtls = l.getStudDtls(accountDetails['email'])
+                mainList = l.getStudDtls(accountDetails['email'])
+                print mainList
+                dtls = mainList[0]
+                intList = mainList[1]
                 d =  dtls[0]
                 courseDtls = l.getCourseDtls(d['id'])
                 r = Register()
@@ -115,7 +121,10 @@ def homepage():
 
         print "in GET" + str('admin')
         l = loginAccount()
-        dtls = l.getStudDtls(email)
+        mainList = l.getStudDtls(email)
+        print mainList
+        dtls = mainList[0]
+        intList = mainList[1]
         d =  dtls[0]
         courseDtls = l.getCourseDtls(d['id'])
         return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls)
@@ -134,7 +143,10 @@ def feedback():
     print "in feedback" + session['username']
     user = session['username']
     l = loginAccount()
-    dtls = l.getStudDtls(user)
+    mainList = l.getStudDtls(user)
+    print mainList
+    dtls = mainList[0]
+    intList = mainList[1]
     d =  dtls[0]
     courseDtls = l.getCourseDtls(d['id'])
     return render_template('feedbackform.html',courses = courseDtls,username = user )
@@ -146,7 +158,10 @@ def home():
     print "in homepage email" + session['username']
     user = session['username']
     l = loginAccount()
-    dtls = l.getStudDtls(user)
+    mainList = l.getStudDtls(user)
+    print mainList
+    dtls = mainList[0]
+    intList = mainList[1]
     d =  dtls[0]
     courseDtls = l.getCourseDtls(d['id'])
     r = Register()
@@ -161,7 +176,9 @@ def home():
             result = reg.updateStudCourses(courseName,courseCode,semester,user)
             print result
             if result == "inserted":
-                dtls = l.getStudDtls(user)
+                mainList = l.getStudDtls(user)
+                dtls = mainList[0]
+                intList = mainList[1]
                 d =  dtls[0]
                 courseDtls = l.getCourseDtls(d['id'])
                 r = Register()
@@ -175,7 +192,9 @@ def home():
             result = reg.deleteStudCourse(courseCode,user)
             print result
             if result == "deleted":
-                dtls = l.getStudDtls(user)
+                mainList = l.getStudDtls(user)
+                dtls = mainList[0]
+                intList = mainList[1]
                 d =  dtls[0]
                 courseDtls = l.getCourseDtls(d['id'])
                 r = Register()
@@ -183,14 +202,15 @@ def home():
                 message = {"msg":"success"}
                 return jsonify(message)
 
-    return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,allcourses = courseList)
+    return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,allcourses = courseList,interests = intList)
 
 @app.route('/planner',methods=['GET','POST'])
 def planner():
     r = Register()
     user = session['username']
     result = r.getCoursesBasedOnInterests(user)
-    return render_template("planner.html",courses = result)
+    result_two = r.getCoursesBasedOnTaken(user)
+    return render_template("planner.html",courses = result,courserecotwo = result_two)
 
 if __name__ == '__main__':
     app.run()

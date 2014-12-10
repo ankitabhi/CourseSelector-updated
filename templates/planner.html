@@ -12,10 +12,22 @@
         ::-moz-placeholder { font-size: 11px;text-align: center  } /* firefox 19+ */
         :-ms-input-placeholder { font-size: 11px; text-align: center } /* ie */
         input:-moz-placeholder { font-size: 11px;text-align: center  }
-    </style>
+    </style> 
+
+	 <script src="../static/js/media/js/jquery.js"></script>
+    <script src="../static/js/media/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/jquery.dataTables.css"/>
+
 
 </head>
 <body>
+
+<div class="codrops-top">
+    <div style="text-align: right;padding-right: 10px;">
+        <a href="{{url_for('logout',filename='index.html')}}">Logout </a>
+
+    </div>
+</div>
 
 <div class="container">
     <header >
@@ -38,31 +50,53 @@
         <div id="home" class="tab active">
 
             <fieldset class="row2">
+                <legend>Based on Interests
+                </legend>
+                <div>
 
-                <div class ="CSSTableGenerator">
-                    <table>
-                        <tr>
-                            <td>Based on Interests</td>
+                    <table id="courseTable1">
+
+                        <thead>
+                        <tr><td>Course Name</td>
+                            <td>Pre-requisite</td>
+                            <td>Credits</td>
+
                         </tr>
-
+                        </thead>
+                        <tbody>
                         {% for course in courses %}
                         <tr><td>{{course.name|safe}}</td>
+                            <td>{{course.prereq|safe}}</td>
+                            <td>{{course.credits|safe}}</td>
                         </tr>
+                        </tbody>
                         {% endfor %}
                     </table>
                 </div>
-                
-                <div class ="CSSTableGenerator">
-                    <table>
+                 </fieldset>
+            <fieldset class="row2">
+                <legend>Based on courses taken
+                </legend>
+                <div class>
+
+                    <table id="courseTable2">
 
 
-                        <tr><td>Based on Courses Taken</td>
 
+                        <thead>
                         </tr>
-
-                        {% for course in courses %}
+                        <tr><td>Course Name</td>
+                            <td>Pre-requisite</td>
+                            <td>Credits</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for course in courserecotwo %}
                         <tr><td>{{course.name|safe}}</td>
+                            <td>{{course.prereq|safe}}</td>
+                            <td>{{course.credits|safe}}</td>
                         </tr>
+                        </tbody>
                         {% endfor %}
                     </table>
                 </div>
@@ -75,3 +109,26 @@
 
 </body>
 </html>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('#courseTable1').DataTable({
+        "searching" : false,
+        "lengthChange": false,
+        "pageLength": 6,
+        "language": {
+            "emptyTable": "Oops!Looks like we couldn't find courses that matched your interests. However, do take a look at our recommedation based on courses taken"
+    }
+    })
+    } );
+
+    jQuery(document).ready(function() {
+    jQuery('#courseTable2').DataTable({
+        "searching" : false,
+        "lengthChange": false,
+        "pageLength": 6
+
+    })
+    } );
+
+</script>

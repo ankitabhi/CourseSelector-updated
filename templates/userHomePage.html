@@ -82,6 +82,16 @@
         </p>
         {% endfor %}
         <p>
+                    <label>Interested in :
+                    </label>
+                    {% for interest in interests %}
+                    <label style="width:100px;text-align: left;">{{interest.tag|capitalize}}
+                    </label>
+                    {% endfor %}
+                </p>
+
+
+                <p>
 
                     <input type="button" id = "edit" style="float:right;padding: 10px;" value="Add course"/>
                     <input type="button" id = "saveBtn" style="float:right;padding: 10px;" value="Save changes" onclick="updateCourses()"/>
