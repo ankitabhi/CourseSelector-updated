@@ -52,7 +52,7 @@ def login():
             courseDtls = l.getCourseDtls(d['id'])
             print courseDtls
             r = Register()
-            courseList = r.getCourses()
+            courseList = r.getOtherCourses(d['id'])
             return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,username = username,allcourses = courseList,interests = intList)
     else:
         print "in this one"
@@ -67,7 +67,7 @@ def login():
             courseDtls = l.getCourseDtls(d['id'])
             print courseDtls
             r = Register()
-            courseList = r.getCourses()
+            courseList = r.getOtherCourses(d['id'])
             return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,username = username,allcourses = courseList)
 
     return render_template('index.html', error=error)
@@ -116,7 +116,7 @@ def homepage():
                 d =  dtls[0]
                 courseDtls = l.getCourseDtls(d['id'])
                 r = Register()
-                courseList = r.getCourses()
+                courseList = r.getOtherCourses(d['id'])
                 return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,usernames = email,allcourses = courseList)
         else:
             error = "Email ID already exists"
@@ -187,7 +187,7 @@ def home():
                 d =  dtls[0]
                 courseDtls = l.getCourseDtls(d['id'])
                 r = Register()
-                courseList = r.getCourses()
+                courseList = r.getOtherCourses(d['id'])
                 message = {"msg":"success"}
                 return jsonify(message)
         elif not request.args.get('code') == None:
@@ -203,7 +203,7 @@ def home():
                 d =  dtls[0]
                 courseDtls = l.getCourseDtls(d['id'])
                 r = Register()
-                courseList = r.getCourses()
+                courseList = r.getOtherCourses(d['id'])
                 message = {"msg":"success"}
                 return jsonify(message)
 
