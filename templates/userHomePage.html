@@ -19,11 +19,7 @@
 <body>
 
 <div class="codrops-top">
-    <div style="text-align: right;padding-right: 10px;">
-        {% for stud in studentDtls %}
-    <label><b>Welcome {{stud.name|safe}}</b></label><hr/><hr/>
-    <a href="{{url_for('logout',filename='index.html')}}">Logout </a>
-    {% endfor %}
+    <div style="text-align: right;padding-right: 10px;"><label id="username">{{username|safe}}</label><a href="{{url_for('logout',filename='index.html')}}">Logout </a></div>
 </div>
     </div>
 
@@ -91,17 +87,20 @@
                 </p>
 
 
-                <p>
+                
 
-                    <input type="button" id = "edit" style="float:right;padding: 10px;" value="Add course"/>
-                    <input type="button" id = "saveBtn" style="float:right;padding: 10px;" value="Save changes" onclick="updateCourses()"/>
+                    
+                    
 
-                </p>
+                
 
 
-                <p>
-        <legend style="text-align: center;">Courses Taken
-            </legend>
+                
+         </fieldset>
+        <fieldset class="row3">
+        <legend style="font-size: 20px">Courses Taken
+        </legend>
+        <input type="button" id = "edit" value="Add course"/>
         <div class>
             <table id="courseTable">
 
@@ -122,11 +121,7 @@
                 </tbody>
             </table>
         </div>
-
-
-        </p>
-
-    </fieldset>
+        </fieldset>
 
 
                 </div>
