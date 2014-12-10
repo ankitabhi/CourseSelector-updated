@@ -57,8 +57,11 @@ def login():
     else:
         print "in this one"
         if session['logged_in'] == True:
-            print request.args.get('username')
-            dtls = l.getStudDtls()
+            username = session['username']
+            mainList = l.getStudDtls(username)
+            print mainList
+            dtls = mainList[0]
+            intList = mainList[1]
             d =  dtls[0]
             print d['id']
             courseDtls = l.getCourseDtls(d['id'])
