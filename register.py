@@ -17,6 +17,11 @@ class Register:
         entries = [dict(code=row[0], name=row[1]) for row in cursor.fetchall()]
         return entries
 
+    def getInterests(self):
+        cursor = conn.execute('SELECT course_code,tag_name FROM course_tags order by course_code')
+        entries = [dict(code=row[0], name=row[1]) for row in cursor.fetchall()]
+        return entries
+
     def insertAccDtls(self,accountDtls):
 
         cursor = conn.execute('insert into student_account_details(title,first_name,middle_name,last_name,email,birth_date,password) values (?,?,?,?,?,?,?)',

@@ -21,7 +21,8 @@ def register():
     r = Register()
     majorList = r.getMajors()
     courseList = r.getCourses()
-    return render_template('register.html',majors = majorList,courses = courseList)
+    interestList = r.getInterests()
+    return render_template('register.html',majors = majorList,courses = courseList,interests = interestList)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
