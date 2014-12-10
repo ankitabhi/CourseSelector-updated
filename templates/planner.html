@@ -38,7 +38,7 @@
 
 <!--<div class="tabs">-->
 
-<form class="register" style="overflow-y:auto;height: 500px">
+<form class="register" style="overflow-y:auto;height: 800px">
 
     <ul class="tab-links">
         <li><a href="{{url_for('home')}}" >Home</a></li>
@@ -49,7 +49,7 @@
     <div class="tab-content">
         <div id="home" class="tab active">
 
-            <fieldset class="row2">
+            <fieldset class="row2" style="height: 400px">
                 <legend>Based on Interests
                 </legend>
                 <div>
@@ -58,6 +58,7 @@
 
                         <thead>
                         <tr><td>Course Name</td>
+                            <td>Description</td>	
                             <td>Pre-requisite</td>
                             <td>Credits</td>
 
@@ -66,6 +67,7 @@
                         <tbody>
                         {% for course in courses %}
                         <tr><td>{{course.name|safe}}</td>
+                            <td>{{course.desc|safe}}</td>
                             <td>{{course.prereq|safe}}</td>
                             <td>{{course.credits|safe}}</td>
                         </tr>
@@ -87,6 +89,7 @@
                         <thead>
                         </tr>
                         <tr><td>Course Name</td>
+                            <td>Description</td>
                             <td>Pre-requisite</td>
                             <td>Credits</td>
                         </tr>
@@ -94,6 +97,7 @@
                         <tbody>
                         {% for course in courserecotwo %}
                         <tr><td>{{course.name|safe}}</td>
+                            <td>{{course.desc|safe}}</td>
                             <td>{{course.prereq|safe}}</td>
                             <td>{{course.credits|safe}}</td>
                         </tr>
@@ -120,7 +124,14 @@ jQuery(document).ready(function() {
         "pageLength": 6,
         "language": {
             "emptyTable": "Oops!Looks like we couldn't find courses that matched your interests. However, do take a look at our recommedation based on courses taken"
-    }
+    },
+    "columns": [
+                                                  null,
+                                                  { "width": "50%" },
+                                                  null,
+                                                  null
+
+                                              ]
     })
     } );
 
@@ -128,7 +139,14 @@ jQuery(document).ready(function() {
     jQuery('#courseTable2').DataTable({
         "searching" : false,
         "lengthChange": false,
-        "pageLength": 6
+        "pageLength": 6,
+        "columns": [
+                                                  null,
+                                                  { "width": "50%" },
+                                                  null,
+                                                  null
+
+                                              ]
 
     })
     } );
