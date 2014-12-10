@@ -51,6 +51,17 @@ class Register:
                                    courseDetails['semester']])
 
         conn.commit()
+
+        interestList = courseDetails['interests']
+        print interestList
+        for key in interestList:
+            print key
+            cursor = conn.execute('insert into course_tags(course_code,tag_name) values (?,?)',
+                                  [coursesCodeList[i],
+                                    key])
+
+        conn.commit()
+
         return "inserted"
 
     def checkIfUserExists(self,username):

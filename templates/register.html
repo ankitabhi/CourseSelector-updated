@@ -237,13 +237,14 @@
         <div class="dropdown">
 
     <ul class="dropdown-list">
-        {% for course in courses %}
+        {% for interest in interests %}
 
 
                             <li>
-                                <input type="checkbox" value="{{course.name}}">{{ course.name|safe }}</li>
+                                <input type="checkbox" value="{{interest.name}}" name="interests">{{ interest.name|safe }}</li>
 
                         {% endfor %}
+
     </ul>
 </div>
 

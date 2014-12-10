@@ -96,7 +96,8 @@ def homepage():
                                          "major":request.form['major'],
                                          "semester":request.form['semester'],
                                          "coursesTaken":request.form['courses'],
-                                         "coursesCodeTaken":request.form['coursesCode']}}
+                                         "coursesCodeTaken":request.form['coursesCode'],
+                                         "interests":request.form.getlist('interests')}}
             q =  accountDetails['courseDtls']
             print q['coursesTaken']
             email = request.form['email']

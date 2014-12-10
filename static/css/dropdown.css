@@ -42,7 +42,7 @@
     background-color: #fdffff;
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 10px;
     position: absolute;
     top: 100%; /* align the dropdown right below the dropdown text */
     border: inherit;
