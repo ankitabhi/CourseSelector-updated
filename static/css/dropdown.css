@@ -44,6 +44,8 @@
     margin: 0;
     padding: 10px;
     position: absolute;
+    height: 50px;
+    overflow-y: auto;
     top: 100%; /* align the dropdown right below the dropdown text */
     border: inherit;
     border-top: none;
