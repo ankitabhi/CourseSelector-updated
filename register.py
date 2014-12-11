@@ -18,8 +18,8 @@ class Register:
         return entries
 
     def getInterests(self):
-        cursor = conn.execute('SELECT course_code,tag_name FROM course_tags order by course_code')
-        entries = [dict(code=row[0], name=row[1]) for row in cursor.fetchall()]
+        cursor = conn.execute('SELECT DISTINCT tag_name FROM course_tags order by course_code')
+        entries = [dict(name=row[0]) for row in cursor.fetchall()]
         return entries
 
     def insertAccDtls(self,accountDtls):
@@ -61,8 +61,8 @@ class Register:
         print interestList
         for key in interestList:
             print key
-            cursor = conn.execute('insert into course_tags(course_code,tag_name) values (?,?)',
-                                  [coursesCodeList[i],
+            cursor = conn.execute('insert into student_interests(s_id,tag_name) values (?,?)',
+                                  [last_id,
                                     key])
 
         conn.commit()
