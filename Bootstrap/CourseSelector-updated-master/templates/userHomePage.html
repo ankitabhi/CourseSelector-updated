@@ -2,22 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <title>Course Selector</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script src = "../static/js/jquery.js"></script>
-    <style>
-        ::-webkit-input-placeholder { font-size: 11px;text-align: center }
-        ::-moz-placeholder { font-size: 11px;text-align: center  } /* firefox 19+ */
-        :-ms-input-placeholder { font-size: 11px; text-align: center } /* ie */
-        input:-moz-placeholder { font-size: 11px;text-align: center  }
-    </style>
-    <script src="../static/js/media/js/jquery.js"></script>
-    <script src="../static/js/media/js/jquery.dataTables.js"></script>
-    <link rel="stylesheet" type="text/css" href="../static/css/jquery.dataTables.css"/>
-    <style type="text/css">
+ <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="bootstrap/ico/favicon.ico">
+<!-- Bootstrap core CSS -->
+    <link href="bootstrap/docs/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+<script src="bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
+<style type="text/css">
 
       .form-signin {
         max-width: 800px;
-        max-height: 1500px;
+        max-height: auto;
         padding: 19px 29px 29px;
         margin: 0 auto 20px;
         background: #e1c192 url(../static/images/old-paper-texture.jpg);
@@ -42,47 +43,15 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700);
 body {
   font-family: 'Ubuntu', sans-serif;
-  background: #e1c192 url(../static/images/books1698x1131.jpg);
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background-color: #f5f5f5;
 }
 button {
     font-family: 'Ubuntu', sans-serif;
 }
 
 </style>
-    <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="bootstrap/ico/favicon.ico">
-    <title>Registration Form</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-<!-- Bootstrap core CSS -->
-    <link href="bootstrap/docs/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="cover.css" rel="stylesheet">
-
-<script src="bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
-
-
 
 </head>
 <body>
-<div class="codrops-top">
-    <div style="text-align: right;padding-right: 10px;">
-        {% for stud in studentDtls %}
-    <label><b>Welcome {{stud.name|safe}}</b></label><hr/><hr/>
-    <a href="{{url_for('logout',filename='index.html')}}">Logout </a>
-    {% endfor %}
-</div>
-    </div>
 <div class="site-wrapper">
 
       <div class="site-wrapper-inner">
@@ -96,64 +65,74 @@ button {
                 <ul class="nav masthead-nav">
                   <li class="active"><a href="{{url_for('home')}}">Home</a></li>
                   <li><a href="{{url_for('feedback')}}">Feedback</a></li>
-                  <li><a href="{{url_for('planner')}}">Plannar</a></li>
+                  <li><a href="{{url_for('planner')}}">Our Recommendation</a></li>
+                  <li><a href="{{url_for('logout',filename='index.html')}}">Logout </a>
+    {% endfor %}</li>
                 </ul>
               </nav>
             </div>
           </div>
 <br>
-
+<br>
           <div class="inner cover">
+            <br>
+<br>
             <form class="register form-signin"  style="overflow-y:auto;height: 500px">
-   
+    <fieldset class="row1">
 
-    <div class="tab-content">
+
+            <div class="tab-content">
             <div id="home" class="tab active">
-    {% for stud in studentDtls %}
-    <label class="heading1" style="width: 100%;text-align: center">Welcome {{stud.name|safe}}</label>
+            {% for stud in studentDtls %}
+            <label class="heading1" style="width: 100%;text-align: center">Welcome {{stud.name|safe}}</label>
 
-
+    </fieldset>
 
     <fieldset class="row2" >
         <legend style="font-size: 20px">Your Profile
         </legend>
-        <p>
-            <label>Degree :
+            <div class="form-group">
+            <label class="col-sm-3 control-label">Degree :
             </label>
-
-            <label style="width: 200px;text-align: left">{{stud.degree|safe}}
+            <div>
+            <label>{{stud.degree|safe}}
             </label>
-        </p>
-
-        <p>
-            <label>Major :
+            </div>
+            </div>
+            <div class="form-group">
+            <label class="col-sm-3 control-label">Major :
             </label>
-
-            <label style="width: 200px;text-align: left">{{stud.major|safe}}
+            <div>
+            <label>{{stud.major|safe}}
             </label>
-        </p>
-
-        <p>
-            <label>Academic Year :
+            </div>
+            </div>
+            <div class="form-group">
+            <label class="col-sm-3 control-label">Academic Year :
             </label>
-
-            <label style="width: 200px;text-align: left">{{stud.ay|safe}}
+            <div>
+            <label>{{stud.ay|safe}}
             </label>
-        </p>
-        {% endfor %}
-        <p>
-
-                    <button type="button" id = "edit" style="float:right;padding: 10px;" value="Add course"/>
-                    <button type="button" id = "saveBtn" style="float:right;padding: 10px;" value="Save changes" onclick="updateCourses()"/>
-
-                </p>
-
-
-                <p>
+            {% endfor %}
+            </div>
+            </div>
+            <div class="form-group">
+            <label class="col-sm-3 control-label">Interested in :</label>
+            <div>
+            {% for interest in interests %}
+            <label style="width:100px;text-align: left;">{{interest.tag|capitalize}}
+            </label>
+            {% endfor %}
+            </div>
+            </div>
+                  
+<fieldset class="row3">
         <legend style="text-align: center;">Courses Taken
             </legend>
+              <button type="button" id = "edit" style="float:right;padding: 10px;" value="Add course" class="btn btn-default btn-inverse">Add course</button>
+                    
         <div class>
-            <table id="courseTable">
+            <table id="courseTable" class="table">
 
                 <thead>
                 <tr><td>Courses Name</td>
@@ -162,11 +141,12 @@ button {
                 </tr>
                 </thead>
                 
-                <tbody>
+                <tbody class="table-striped table-hover">
                 {% for course in courses %}
                         <tr><td>{{course.name|safe}}</td>
                             <td>{{course.semester|safe}}</td>
-                            <td><img src="../static/images/delete-24.jpg" alt="Click to delete course" class="deleteBtn"/></td>
+                            <td><button type="button" class="btn btn-default deleteBtn" aria-label="Click to delete course"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button></td>
                         </tr>
                 {% endfor %}
                 </tbody>
@@ -174,7 +154,7 @@ button {
         </div>
 
 
-        </p>
+    
 
     </fieldset>
 

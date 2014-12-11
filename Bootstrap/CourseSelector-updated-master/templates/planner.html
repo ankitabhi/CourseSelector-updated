@@ -2,79 +2,165 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="../static/css/default.css" />
-    <link rel="stylesheet" type="text/css" href="../static/css/tabs.css" />
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <title>Planner</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="bootstrap/ico/favicon.ico">
+<!-- Bootstrap core CSS -->
+    <link href="bootstrap/docs/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-        ::-webkit-input-placeholder { font-size: 11px;text-align: center }
-        ::-moz-placeholder { font-size: 11px;text-align: center  } /* firefox 19+ */
-        :-ms-input-placeholder { font-size: 11px; text-align: center } /* ie */
-        input:-moz-placeholder { font-size: 11px;text-align: center  }
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+<script src="bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
+<style type="text/css">
+
+      .form-signin {
+        max-width: 1300px;
+        max-height: auto;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background: #e1c192 url(../static/images/old-paper-texture.jpg);
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+           }
+
     </style>
+
+<style type="text/css">
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700);
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
+button {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+</style>
 
 </head>
 <body>
 
-<div class="container">
-    <header >
-        <h1> <strong>Course Selector</strong></h1>
-        <h2>A tool to help you select your courses</h2>
-    </header>
-</div>
+<div class="site-wrapper">
 
-<!--<div class="tabs">-->
+      <div class="site-wrapper-inner">
 
-<form class="register" style="overflow-y:auto;height: 500px">
+        <div class="cover-container">
 
-    <ul class="tab-links">
-        <li><a href="{{url_for('home', email = 'admin')}}" >Home</a></li>
-        <li><a href="{{url_for('feedback')}}">Feedback</a></li>
-        <li class="active"><a href="{{url_for('planner')}}">Planner</a></li>
-    </ul>
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">Course Selector</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li class="active"><a href="{{url_for('home')}}">Home</a></li>
+                  <li><a href="{{url_for('feedback')}}">Feedback</a></li>
+                  <li><a href="{{url_for('planner')}}">Our Recommendation</a></li>
+                  <li><a href="{{url_for('logout',filename='index.html')}}">Logout </a>
+    {% endfor %}</li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+<br>
+<br>
 
-    <div class="tab-content">
-        <div id="home" class="tab active">
-
-            <fieldset class="row2">
-
-                <div class ="CSSTableGenerator">
-                    <table>
+<div class="inner cover">
+<br>
+<br>
 
 
-                        <tr><td>Courses Name</td>
-                            <td>Rating</td>
+<form class="register form-signin" style="overflow-y:auto;height: 500px">
+
+    
+
+            <fieldset class="row1">
+
+              <legend>Based on Interests
+                </legend>
+                <div>
+                    <table class="table" id="courseTable1">
+                    <thead>
+                        <tr><td>Course Name</td>
+                            <td>Description</td>    
+                            <td>Pre-requisite</td>
+                            <td>Pre-req Taken?</td>
+                            <td>Credits</td>
+
                         </tr>
+                        </thead>
+                    <tbody class="table-striped table-hover">
+
 
                         {% for course in courses %}
                         <tr><td>{{course.name|safe}}</td>
+                            <td>{{course.desc|safe}}</td>
+                            <td>{{course.prereq|safe}}</td>
 
-                            <td>
-                                <div class="stars">
+                            <td>{{course.taken|safe}}</td>
 
-                                    <input type="radio" name="star" class="star-1" id="star-1" />
-                                    <label class="star-1" for="star-1">1</label>
-                                    <input type="radio" name="star" class="star-2" id="star-2" />
-                                    <label class="star-2" for="star-2">2</label>
-                                    <input type="radio" name="star" class="star-3" id="star-3" />
-                                    <label class="star-3" for="star-3">3</label>
-                                    <input type="radio" name="star" class="star-4" id="star-4" />
-                                    <label class="star-4" for="star-4">4</label>
-                                    <input type="radio" name="star" class="star-5" id="star-5" />
-                                    <label class="star-5" for="star-5">5</label>
-                                    <span></span>
+                            <td>{{course.credits|safe}}</td>
+                        </tr>
+                       
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </fieldset>
+             <fieldset class="row2">
+                <legend>Based on courses taken
+                </legend>
+                <div class>
 
-                                </div>
-                            </td>
+                    <table class="table" id="courseTable2">
+
+
+
+                        <thead>
+                        </tr>
+                        <tr><td>Course Name</td>
+                            <td>Description</td>
+                            <td>Pre-requisite</td>
+                            <td>Pre-req Taken?</td>
+                            <td>Credits</td>
+                        </tr>
+                        </thead>
+                        <tbody class="table-striped table-hover">
+                        {% for course in courserecotwo %}
+                        <tr><td>{{course.name|safe}}</td>
+                            <td>{{course.desc|safe}}</td>
+                            <td>{{course.prereq|safe}}</td>
+                            <td>{{course.taken|safe}}</td>
+                            <td>{{course.credits|safe}}</td>
                         </tr>
                         {% endfor %}
+                        </tbody>
+                        
                     </table>
                 </div>
             </fieldset>
         </div>
     </div>
-</form>
+            </form>
+        </div>
+    </div>
+     </div>
+      </div>
+       </div>
+        </div>
+
 
 
 
