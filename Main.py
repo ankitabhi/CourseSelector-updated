@@ -84,6 +84,7 @@ def homepage():
         print "ooooo"
         print exists
         if not exists:
+            session['username'] = request.form['email']
             accountDetails = {"email":request.form['email'],
                           "password":request.form['password'],
                           "title": request.form['title'],
@@ -140,6 +141,7 @@ def homepage():
 def logout():
     if request.method == 'POST':
         session['logged_in'] == False
+        session['username'] == ""
         return render_template('index.html')
     return render_template('index.html')
 
