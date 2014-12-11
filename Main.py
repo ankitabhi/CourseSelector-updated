@@ -217,7 +217,7 @@ def planner():
     user = session['username']
     result = r.getCoursesBasedOnInterests(user)
     result_two = r.getCoursesBasedOnTaken(user)
-    return render_template("planner.html",courses = result,courserecotwo = result_two)
+    return render_template("planner.html",courses = result,courserecotwo = result_two,,username = user)
 
 if __name__ == '__main__':
     app.run()
