@@ -209,7 +209,7 @@ def home():
                 message = {"msg":"success"}
                 return jsonify(message)
 
-    return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,allcourses = courseList,interests = intList)
+    return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,allcourses = courseList,interests = intList,,username = user)
 
 @app.route('/planner',methods=['GET','POST'])
 def planner():
