@@ -1,0 +1,402 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="bootstrap/ico/favicon.ico">
+    <title>Registration Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+<!-- Bootstrap core CSS -->
+    <link href="bootstrap/docs/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+
+<script src="bootstrap/docs/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- Le styles -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+
+      .form-signin {
+        max-width: 800px;
+        max-height: 1500px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background: #e1c192 url(../static/images/old-paper-texture.jpg);
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+           }
+
+    </style>
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">
+<style type="text/css">
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700);
+body {
+  font-family: 'Ubuntu', sans-serif;
+  background: #e1c192 url(../static/images/books1698x1131.jpg);
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+}
+button {
+    font-family: 'Ubuntu', sans-serif;
+}
+h2 {
+  font-style: italic;
+  color: white;
+}
+h1 {
+  color: white;
+}
+</style>
+
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+  </script>
+
+  <script type="text/javascript">
+            /* <![CDATA[ */
+            jQuery(function(){
+
+                jQuery("#email").validate({
+                    expression: "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;",
+                    message: "Please enter a valid Email ID"
+                });
+
+                jQuery("#confirmemail").validate({
+                    expression: "if ((VAL == jQuery('#email').val()) && VAL) return true; else return false;",
+                    message: "Repeat Email field doesn't match the Email field"
+                });
+
+                jQuery("#password").validate({
+                    expression: "if (VAL.length > 5 && VAL) return true; else return false;",
+                    message: "Please enter a valid Password"
+                });
+
+                jQuery("#confirmpassword").validate({
+                    expression: "if ((VAL == jQuery('#password').val()) && VAL) return true; else return false;",
+                    message: "Repeat Password field doesn't match the Password field"
+                });
+
+                jQuery("#gender").validate({
+                    expression: "if (isChecked(SelfID)) return true; else return false;",
+                    message: "Please select a radio button"
+                });
+
+				jQuery('.register').validated(function(){
+					alert("Use this call to make AJAX submissions.");
+				});
+            });
+
+
+
+            $(function () {
+                $(".dropdown").click(function () {
+                    $(this).toggleClass("is-active");
+                });
+
+                $(".dropdown ul").click(function (e) {
+                    e.stopPropagation();
+                });
+            });
+
+
+        </script>
+
+</head>
+<body>
+
+<form action="{{url_for('homepage')}}" method="post" class="register form-signin form-horizontal" role="form">
+    <div id="wrapper">
+        <h3>Registration</h3>
+            <fieldset class="row1">
+                <legend>Account Details
+                </legend>
+                <div class="form-group">
+                    <label for="email" class="col-sm-2 control-label">Email *</label>
+                    <div>
+                        <input type="text" style="height: 30px;" name="email" required="" id="email"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Repeat email *</label>
+                    <div>
+                        <input type="text" style="height: 30px;" required="" name="confirmemail" id="confirmemail"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Password*</label>
+                    <div>
+                        <input type="text" style="height: 30px;" name="password" required="" id="password"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Repeat Password*</label>
+                    <div>
+                        <input type="text" style="height: 30px;" required="" name="confirmpassword" id="confirmpassword"/>
+                </div>
+                <label class="obinfo">* mandatory fields</label>
+            </fieldset>
+            <fieldset class="row2">
+                <legend>Personal Details
+                </legend>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Title *</label>
+                    <div>
+                        <select style="width: 90px; height: 30px;" name="title">
+                            <option value="Mr" selected>Mr</option>
+                            <option value="Miss">Miss</option>
+                            <option value="Mrs">Mrs</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">     
+                    <label class="col-sm-2 control-label">Name *</label>
+                    <div>
+                        <input  type="text" name="first_name" maxlength="30" style="width: 100px; height: 30px;"placeholder="First Name" required="">
+                        <input  type="text" name="middle_name" maxlength="30" style="width: 100px; height: 30px" placeholder="Middle Name">
+                        <input  type="text" name="last_name" maxlength="30" style="width: 100px; height: 30px;"placeholder="Last Name">
+                        <p id="gender">
+                    </div>
+                </div>
+        <div class="form-group"> 
+        <label class="gender col-sm-2 control-label">Gender *</label>
+        <div>
+        <input class="gender" type="radio" value="radio" name="sex" required=""/>
+        Male<input class="gender" type="radio" value="radio" name="sex" required=""/>
+        Female
+        </div>
+    </div>
+    </p>
+        <div class="form-group">
+        <label class="col-sm-2 control-label">Street
+        </label>
+        <div>
+            <input style="height: 30px;" type="text" class="long" name="street"/>
+        </div>
+        </div>
+        <div class="form-group">        
+        <label class="col-sm-2 control-label">City
+        </label>
+        <div>
+            <input style="height: 30px;" type="text" class="long" name="city"/>
+        </div>
+        </div>
+        
+        <div class="form-group">        
+        <label class="col-sm-2 control-label">State
+        </label>    
+        <div>
+            <select name="state">
+            <option>
+            </option>
+            <option value="1" selected>MD
+            </option>
+        </select>
+        </div>
+        </div>
+        <div class="form-group">      
+        <label class="col-sm-2 control-label">Country
+        </label>
+        <div>
+            <select name="country">
+            <option>
+            </option>
+            <option value="1" selected>United States
+            </option>
+            </select>
+        </div>
+        </div>
+        <div class="form-group">         
+        <label class="col-sm-2 control-label">Birthdate *
+        </label>
+        <div>
+            <input type="text" style="height: 30px;" id="datepicker" placeholder="mm/dd/yyyy" required="" name="birthdate">
+        </div>
+        </div>
+
+</fieldset>
+
+<fieldset class="row3">
+    <legend>Academic Details
+    </legend>
+        <div class="form-group"> 
+        <label class="col-sm-2 control-label">Degree *
+        </label>
+        <div>
+            <select style="width: 100px; height: 30px;" name="degree">
+                <option value="bachelors">Bachelor's</option>
+                <option value="masters" selected>Master's</option>
+            </select>
+        </div>
+        </div>
+
+        <div class="form-group">        
+        <label class="col-sm-2 control-label">Major *
+        </label>
+        <div>
+            <select id="major" style="width: 250px; height: 30px;" name="major">
+                {% for major in majors %}
+                <option value="{{ major.code }}">{{ major.name|safe }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        </div>
+
+        <div class="form-group">        
+        <label class="col-sm-2 control-label">Current Semester *
+        </label>
+        <div>
+            <select name="semester" style="height: 30px;">
+                    <option value="Fall 2014" selected>Fall 2014</option>
+                    <option value="Spring 2015">Spring 2015</option>
+            </select>
+        </div>
+        </div>
+
+        <div class="form-group">       
+        <label class="col-sm-2 control-label">Current courses *
+        </label>
+        <div>
+            <select id="courses" style="width: 400px; height: 30px;">
+                {% for course in courses %}
+                <option id="{{ course.code }}" value="{{course.name}}">{{ course.name|safe }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-default btn-inverse" type="button" value="Add" onclick="addToBox();">Add</button>
+        </div>
+        </div>
+
+        <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div>     
+        <textarea id="courseSelected" name="courses"></textarea>
+        </div>
+        </div>
+        <div class="form-group">
+        <label class="col-sm-2 control-label">Interest *</label>
+        <div>        
+            <div class="dropdown">
+                <ul class="dropdown-list">
+                    {% for course in courses %}
+                    <li>
+                        <input type="checkbox" value="{{course.name}}">{{ course.name|safe }}
+                    </li>
+                    {% endfor %}
+                </ul>   
+            </div>
+        </div>
+
+
+
+    </fieldset>
+
+    <fieldset class="row5">
+        <div style="padding-left:300px;" >
+            <button class="btn btn-default btn-inverse" type="submit" value="Register" onclick="registerUser()">Register</button>
+        </div>
+    </fieldset>
+    </div>
+</form>
+</body>
+
+</html>
+
+
+<script type="text/javascript">
+
+
+    function addToBox(){
+        var course = document.getElementById("courses").value
+        existingC = document.getElementById("courseSelected").value
+        existingCC = document.getElementById("courseCodeSelected").value
+        var courseCode = ""
+        var nodes = document.getElementById("courses").childNodes
+
+
+
+        //alert(existingC)
+        if (! (existingC == "" && existingCC == "") ) {
+            if (!checkifAlreadyAdded(existingC, course)) {
+                existingC = existingC + course + "\n";
+
+
+                for(i=0;i<nodes.length;i++)
+                {
+                    if(nodes[i].selected){
+                        existingCC = existingCC + nodes[i].id+"\n"
+
+                    }
+                }
+                document.getElementById("courseSelected").value = existingC
+                document.getElementById("courseCodeSelected").value = existingCC
+            }
+
+            else
+                alert("This course has been added already")
+        }else {
+            for(i=0;i<nodes.length;i++)
+                {
+                    if(nodes[i].selected){
+                        existingCC = existingCC + nodes[i].id + "\n"
+
+                    }
+                }
+            existingC = existingC + course + "\n";
+            document.getElementById("courseSelected").value = existingC
+            document.getElementById("courseCodeSelected").value = existingCC
+        }
+    }
+
+    function checkifAlreadyAdded(e,c){
+        //alert(e);
+        var s = e.split("\n")
+        //alert(s.length)
+        for(i=0;i<s.length;i++){
+            if(s[i] == c)
+                return true;
+        }
+        return false;
+    }
+
+
+</script>
+
+
+
+
