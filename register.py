@@ -44,6 +44,8 @@ class Register:
 
         coursesTaken = courseDetails['coursesTaken']
         coursesCodeTaken = courseDetails['coursesCodeTaken']
+        coursesNameList = [i.strip() for i in coursesNameList]
+        coursesCodeList = [i.strip() for i in coursesCodeList]
         print coursesTaken
 
         coursesNameList = coursesTaken.split("\n")
