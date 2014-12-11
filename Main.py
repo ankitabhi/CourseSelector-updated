@@ -117,7 +117,7 @@ def homepage():
                 courseDtls = l.getCourseDtls(d['id'])
                 r = Register()
                 courseList = r.getOtherCourses(d['id'])
-                return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,usernames = email,allcourses = courseList)
+                return render_template("userHomePage.html",studentDtls=dtls,courses = courseDtls,usernames = email,allcourses = courseList,interests = intList)
         else:
             error = "Email ID already exists"
             return render_template('register.html',error = error)
